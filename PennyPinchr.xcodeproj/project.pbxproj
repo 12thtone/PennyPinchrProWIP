@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037C3D921E022BF8001AAFEE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */; };
+		037C3D961E022CB0001AAFEE /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D951E022CB0001AAFEE /* FamilyViewController.swift */; };
+		037C3D981E022CC2001AAFEE /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D971E022CC2001AAFEE /* FamilyTableViewCell.swift */; };
 		03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB61DFB1AA100855574 /* AppDelegate.swift */; };
 		03979CB91DFB1AA100855574 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB81DFB1AA100855574 /* ViewController.swift */; };
 		03979CBC1DFB1AA100855574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03979CBA1DFB1AA100855574 /* Main.storyboard */; };
@@ -21,6 +24,7 @@
 		03CD1DAA1DFDBBAA00CFECC8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD1DA91DFDBBAA00CFECC8 /* DataService.swift */; };
 		03CD1DAE1DFDC67C00CFECC8 /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */; };
 		03D5C7031DFEF4A600E4484E /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D5C7021DFEF4A600E4484E /* BudgetModel.swift */; };
+		49E89EC12AF1E96EE6C1E3EF /* Pods_PennyPinchr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE69B08C5BEEF118F8392AA6 /* Pods_PennyPinchr.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		037C3D951E022CB0001AAFEE /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
+		037C3D971E022CC2001AAFEE /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
 		03979CB31DFB1AA100855574 /* PennyPinchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyPinchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03979CB61DFB1AA100855574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03979CB81DFB1AA100855574 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +68,9 @@
 		03CD1DA91DFDBBAA00CFECC8 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		03D5C7021DFEF4A600E4484E /* BudgetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
+		38481A9B2E903AE6328A7316 /* Pods-PennyPinchr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PennyPinchr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PennyPinchr/Pods-PennyPinchr.debug.xcconfig"; sourceTree = "<group>"; };
+		B9B8F1D4BEF4EF0F060CB680 /* Pods-PennyPinchr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PennyPinchr.release.xcconfig"; path = "Pods/Target Support Files/Pods-PennyPinchr/Pods-PennyPinchr.release.xcconfig"; sourceTree = "<group>"; };
+		DE69B08C5BEEF118F8392AA6 /* Pods_PennyPinchr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PennyPinchr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E89EC12AF1E96EE6C1E3EF /* Pods_PennyPinchr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		037C3D941E022C7F001AAFEE /* Family */ = {
+			isa = PBXGroup;
+			children = (
+				037C3D951E022CB0001AAFEE /* FamilyViewController.swift */,
+				037C3D971E022CC2001AAFEE /* FamilyTableViewCell.swift */,
+			);
+			name = Family;
+			sourceTree = "<group>";
+		};
 		03979CAA1DFB1AA100855574 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +115,8 @@
 				03979CCA1DFB1AA100855574 /* PennyPinchrTests */,
 				03979CD51DFB1AA100855574 /* PennyPinchrUITests */,
 				03979CB41DFB1AA100855574 /* Products */,
+				37096EB873480766D9DC4267 /* Pods */,
+				17142E04BEA1D5F2387CBC06 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +136,7 @@
 				03979CEA1DFC639300855574 /* Views */,
 				03979CEB1DFC63AD00855574 /* Home */,
 				03979CEC1DFC63B800855574 /* ShoppingSession */,
+				037C3D941E022C7F001AAFEE /* Family */,
 				03979CED1DFC640A00855574 /* Model */,
 				03979CEE1DFC641B00855574 /* Service */,
 				03979CBA1DFB1AA100855574 /* Main.storyboard */,
@@ -121,6 +144,7 @@
 				03979CBF1DFB1AA100855574 /* LaunchScreen.storyboard */,
 				03979CC21DFB1AA100855574 /* Info.plist */,
 				03979CB61DFB1AA100855574 /* AppDelegate.swift */,
+				037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */,
 			);
 			path = PennyPinchr;
 			sourceTree = "<group>";
@@ -186,6 +210,23 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		17142E04BEA1D5F2387CBC06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE69B08C5BEEF118F8392AA6 /* Pods_PennyPinchr.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37096EB873480766D9DC4267 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38481A9B2E903AE6328A7316 /* Pods-PennyPinchr.debug.xcconfig */,
+				B9B8F1D4BEF4EF0F060CB680 /* Pods-PennyPinchr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,9 +234,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03979CDB1DFB1AA100855574 /* Build configuration list for PBXNativeTarget "PennyPinchr" */;
 			buildPhases = (
+				0BCFA166309C4F154F51769B /* [CP] Check Pods Manifest.lock */,
 				03979CAF1DFB1AA100855574 /* Sources */,
 				03979CB01DFB1AA100855574 /* Frameworks */,
 				03979CB11DFB1AA100855574 /* Resources */,
+				8581BA86E380EAF54222C013 /* [CP] Embed Pods Frameworks */,
+				EF5F3EFC3948A15CF3B6657F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -318,19 +362,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BCFA166309C4F154F51769B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8581BA86E380EAF54222C013 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PennyPinchr/Pods-PennyPinchr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF5F3EFC3948A15CF3B6657F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PennyPinchr/Pods-PennyPinchr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		03979CAF1DFB1AA100855574 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				03979CF01DFC64C800855574 /* HomeTableViewCell.swift in Sources */,
+				037C3D981E022CC2001AAFEE /* FamilyTableViewCell.swift in Sources */,
 				03979CE91DFC5E3100855574 /* HomeViewController.swift in Sources */,
 				03CD1DAE1DFDC67C00CFECC8 /* SessionModel.swift in Sources */,
 				03D5C7031DFEF4A600E4484E /* BudgetModel.swift in Sources */,
 				03979CF41DFC6BD000855574 /* DataModel.xcdatamodeld in Sources */,
+				037C3D921E022BF8001AAFEE /* MainTabBarViewController.swift in Sources */,
 				03979CB91DFB1AA100855574 /* ViewController.swift in Sources */,
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
 				03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */,
+				037C3D961E022CB0001AAFEE /* FamilyViewController.swift in Sources */,
 				03CD1DAA1DFDBBAA00CFECC8 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +574,7 @@
 		};
 		03979CDC1DFB1AA100855574 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38481A9B2E903AE6328A7316 /* Pods-PennyPinchr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A6KJB7CEQ9;
@@ -492,6 +588,7 @@
 		};
 		03979CDD1DFB1AA100855574 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9B8F1D4BEF4EF0F060CB680 /* Pods-PennyPinchr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A6KJB7CEQ9;
