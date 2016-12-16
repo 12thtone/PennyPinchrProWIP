@@ -17,6 +17,7 @@ class UserModel {
     private var _periodCashSpent: String!
     private var _periodCreditSpent: String!
     private var _imageURL: String!
+    private var _userImage: UIImage!
     
     var name: String {
         return _name
@@ -42,28 +43,32 @@ class UserModel {
         return _imageURL
     }
     
-    init(curBudget: FIRDataSnapshot) {
-        if let nameRetrieved = curBudget.value(forKey: "name") {
+    var userImage: UIImage {
+        return _userImage
+    }
+    
+    init(user: [String: AnyObject]) {
+        if let nameRetrieved = user["name"] {
             self._name = "\(nameRetrieved)"
         }
         
-        if let periodBudgetRetrieved = curBudget.value(forKey: "periodBudget") {
+        if let periodBudgetRetrieved = user["periodBudget"] {
             self._periodBudget = "\(periodBudgetRetrieved)"
         }
         
-        if let periodTotalSpentRetrieved = curBudget.value(forKey: "periodTotalSpent") {
+        if let periodTotalSpentRetrieved = user["periodTotalSpent"] {
             self._periodTotalSpent = "\(periodTotalSpentRetrieved)"
         }
         
-        if let periodCashSpentRetrieved = curBudget.value(forKey: "periodCashSpent") {
+        if let periodCashSpentRetrieved = user["periodCashSpent"] {
             self._periodCashSpent = "\(periodCashSpentRetrieved)"
         }
         
-        if let periodCreditSpentRetrieved = curBudget.value(forKey: "periodCreditSpent") {
+        if let periodCreditSpentRetrieved = user["periodCreditSpent"] {
             self._periodCreditSpent = "\(periodCreditSpentRetrieved)"
         }
         
-        if let imageURLRetrieved = curBudget.value(forKey: "imageURL") {
+        if let imageURLRetrieved = user["imageURL"] {
             self._imageURL = "\(imageURLRetrieved)"
         }
     }

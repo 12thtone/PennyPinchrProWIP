@@ -146,6 +146,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return HomeTableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sessionVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionVC") as! ViewController
+        sessionVC.session = sessions[indexPath.row]
+        let navController = UINavigationController(rootViewController: sessionVC)
+        
+        self.present(navController, animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

@@ -20,6 +20,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var delegate: SessionDelegate?
     
+    var session: SessionModel?
+    
     var budget = 0.0
     var spent = 0.0
     var remaining = 0.0
@@ -56,11 +58,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func setupViews() {
-        spentLabel.isHidden = true
-        remainingLabel.isHidden = true
-        
-        moneyField.placeholder = "Enter Budget"
-        enterButton.setTitle("Save Budget", for: .normal)
+        if session != nil {
+            spentLabel.isHidden = true
+            remainingLabel.isHidden = true
+            
+            moneyField.placeholder = "Enter Budget"
+            enterButton.setTitle("Save Budget", for: .normal)
+        } else {
+            budget = Double((session?.budget)!)!
+            spent = Double((session?.total)!)!
+            remaining = Double((session?.budget)!)! - (Double((session?.cash)!)! + Double((session?.credit)!)!)
+            cash = Double((session?.cash)!)!
+            credit = Double((session?.credit)!)!
+        }
         
         let keyboardTapDismiss = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(keyboardTapDismiss)

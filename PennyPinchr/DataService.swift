@@ -139,6 +139,7 @@ class DataService {
         }
         
         session.setValue(budgetToSave, forKeyPath: "currentBudget")
+        defaults.set(budgetToSave, forKey: "currentBudget")
         
         do {
             try managedContext.save()
@@ -148,9 +149,5 @@ class DataService {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-    }
-    
-    func settingsArray() -> [String] {
-        return ["Add User", "Info", "Logout"]
     }
 }

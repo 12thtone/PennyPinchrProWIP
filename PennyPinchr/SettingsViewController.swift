@@ -29,12 +29,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataService.ds.settingsArray().count
+        return UserService.us.settingsArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTVC") as? SettingsTableViewCell {
-            cell.settingActionLabel.text = DataService.ds.settingsArray()[indexPath.row]
+            cell.settingActionLabel.text = UserService.us.settingsArray()[indexPath.row]
             
             return cell
         }
