@@ -9,6 +9,13 @@
 import UIKit
 
 class FamilyTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var budgetStatusImageView: UIImageView!
+    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var cashLabel: UILabel!
+    @IBOutlet weak var creditLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

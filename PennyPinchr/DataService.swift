@@ -149,4 +149,8 @@ class DataService {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+    func settingsArray() -> [String] {
+        return ["Add User", "Info", "Logout"]
+    }
 }

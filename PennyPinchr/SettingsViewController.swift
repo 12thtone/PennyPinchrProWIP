@@ -1,27 +1,22 @@
 //
-//  FamilyViewController.swift
+//  SettingsViewController.swift
 //  PennyPinchr
 //
-//  Created by Matt Maher on 12/14/16.
+//  Created by Matt Maher on 12/15/16.
 //  Copyright © 2016 MMMD. All rights reserved.
 //
 
 import UIKit
 
-class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var percentSpentLabel: UILabel!
-    
-    var users = [UserModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        loadUsers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,16 +24,12 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    func loadUsers() {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return DataService.ds.settingsArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,10 +42,18 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-        profileVC.user = users[indexPath.row]
-        let navController = UINavigationController(rootViewController: profileVC)
         
-        self.present(navController, animated: true, completion: nil)
+//        ["Add User", "Info", "Logout"]
+        
+        if indexPath.row == 0 {
+            let createUserVC = self.storyboard?.instantiateViewController(withIdentifier: "CreateUserVC") as! CreateUserViewController
+            let navController = UINavigationController(rootViewController: createUserVC)
+            
+            self.present(navController, animated: true, completion: nil)
+        } else if indexPath.row == 1 {
+            
+        } else {
+            
+        }
     }
 }
