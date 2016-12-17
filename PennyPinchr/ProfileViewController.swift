@@ -8,14 +8,27 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var userImageView: ImageViewRadius!
+    @IBOutlet weak var budgetStatusImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var userBudgetLabel: UILabel!
+    @IBOutlet weak var editBudgetButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     var user: UserModel?
+    var historicArray = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
 
-        // Do any additional setup after loading the view.
+        let editImage = UIImage(named: "edit")
+        editBudgetButton.imageView?.contentMode = .scaleAspectFit
+        editBudgetButton.setImage(editImage, for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,15 +36,23 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return historicArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC") as? ProfileTableViewCell {
+            
+            return cell
+        }
+        return ProfileTableViewCell()
+    }
+    
+    @IBAction func editBudgetTapped(_ sender: Any) {
+        
+    }
 }

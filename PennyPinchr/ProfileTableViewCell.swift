@@ -9,6 +9,10 @@
 import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cashLabel: UILabel!
+    @IBOutlet weak var creditLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

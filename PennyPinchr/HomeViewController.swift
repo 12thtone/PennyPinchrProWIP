@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var spentLabel: UILabel!
     
     var sessions = [SessionModel]()
-    var budget = [BudgetModel]()
+    var budget: BudgetModel?
     var savedSessions = [NSManagedObject]()
     var savedBudget = [NSManagedObject]()
     
@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        if budget.isEmpty {
+        if budget == nil {
             
             newUserBudget()
         }
@@ -89,13 +89,41 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        for onlyBudget in savedBudget {
-            let theOnlyBudget = BudgetModel.init(curBudget: onlyBudget)
-            budget.append(theOnlyBudget)
-        }
+        //        for onlyBudget in savedBudget {
+        //
+        //            let budgetDict = ["currentBudget": "", "currentSpent": "", "currentSpentCash": "", "currentSpentCredit": ""]
+        //            let theOnlyBudget = BudgetModel.init(curBudget: budgetDict)
+        //            budget.append(theOnlyBudget)
+        //        }
         
         if savedBudget.isEmpty == false {
-            budget.append(BudgetModel.init(curBudget: savedBudget.first!))
+            var currentBudget = ""
+            var currentSpent = ""
+            var currentSpentCash = ""
+            var currentSpentCredit = ""
+            
+            if let cBudget = savedBudget.first!.value(forKey: "currentBudget") {
+                currentBudget = "\(cBudget)"
+            }
+            
+            if let cSpent = savedBudget.first!.value(forKey: "currentSpent") {
+                currentSpent = "\(cSpent)"
+            }
+            
+            if let cSpentCash = savedBudget.first!.value(forKey: "currentSpentCash") {
+                currentSpentCash = "\(cSpentCash)"
+            }
+            
+            if let cSpentCredit = savedBudget.first!.value(forKey: "currentSpentCredit") {
+                currentSpentCredit = "\(cSpentCredit)"
+            }
+            
+            let budgetDict = ["currentBudget": currentBudget,
+                "currentSpent": currentSpent,
+                "currentSpentCash": currentSpentCash,
+                "currentSpentCredit": currentSpentCredit]
+            
+            budget = BudgetModel.init(curBudget: budgetDict)
         }
         
         setViews()
@@ -103,10 +131,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setViews() {
         
-        if budget.isEmpty {
+        if budget == nil {
             budgetLabel.text = "Period Budget: $0.00"
         } else {
-            budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(budget.first!.budget)!))"
+            budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(budget!.budget)!))"
         }
         
         if sessions.isEmpty {
@@ -116,7 +144,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if sessions.isEmpty == false {
-            if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget.first!.budget)! {
+            if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
                 handleOverBudget()
             }
         }
@@ -169,7 +197,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func reloadSessions() {
         loadData()
         
-        if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget.first!.budget)! {
+        if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
             overBudgetAlert()
         }
     }

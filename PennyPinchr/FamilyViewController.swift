@@ -20,6 +20,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var reportsButton: UIButton!
     
     var users = [UserModel]()
+    var budget: BudgetModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,23 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             (result: [String: String]) in
             
             print(result)
+            
+            self.budget = BudgetModel(curBudget: result)
+            
+            var totalSpent = 0.0
+            var userBudget = 0.0
+            
+            if let tSpent = self.budget?.spent {
+                totalSpent = Double("\(tSpent)")!
+            }
+            
+            if let uBudget = self.budget?.budget {
+                userBudget = Double("\(uBudget)")!
+            }
+            
+            let percent = Int(totalSpent / userBudget)
+            
+            self.percentSpentLabel.text = "\(percent)% of Budget Spent"
             
             if result["groupUsers"]! != "" {
                 UserService.us.getUserData(userString: result["groupUsers"]!) {
