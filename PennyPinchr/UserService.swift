@@ -14,6 +14,10 @@ import Alamofire
 class UserService {
     static let us = UserService()
     
+    let defaults = UserDefaults.standard
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var sessions = [NSManagedObject]()
+    
     var groupID: String {
         if defaults.string(forKey: "groupID") != nil {
             return defaults.string(forKey: "groupID")!
@@ -27,10 +31,6 @@ class UserService {
         }
         return ""
     }
-    
-    let defaults = UserDefaults.standard
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var sessions = [NSManagedObject]()
     
     func isLogedIn() -> Bool {
         return defaults.bool(forKey: "isLoggedIn")
@@ -96,11 +96,11 @@ class UserService {
             accountDict = ["email": "\(returnedDict["email"]!)",
                            "currentBudget": "\(returnedDict["currentBudget"]!)"]
             
-            if returnedDict["users"] != nil {
-                accountDict["users"] = "\(returnedDict["users"]!)"
-                self.defaults.set("\(returnedDict["users"]!)", forKey: "allUsers")
+            if returnedDict["groupUsers"] != nil {
+                accountDict["groupUsers"] = "\(returnedDict["groupUsers"]!)"
+                self.defaults.set("\(returnedDict["groupUsers"]!)", forKey: "allUsers")
             } else {
-                accountDict["users"] = ""
+                accountDict["groupUsers"] = ""
             }
             
             if returnedDict["currentSpent"] != nil {
@@ -133,37 +133,58 @@ class UserService {
     
     func getUserData(userString: String, completion:@escaping (_ result: [[String: AnyObject]]) -> Void) {
         var userDictArray = [[String: AnyObject]]()
-        let userArray = userString.components(separatedBy: ",")
+        var userArray = userString.components(separatedBy: ",")
+        userArray.removeLast()
         
         for user in userArray {
+            
             FB_DATABASE_REF.child("users").child(user.replacingOccurrences(of: ",", with: "")).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 let returnedDict = snapshot.value as? [String : String] ?? [:]
                 print(returnedDict)
                 
-                var userDict = ["name": "\(returnedDict["name"]!)" as AnyObject,
-                                "imageURL": "\(returnedDict["imageURL"]!)" as AnyObject,
-                                "currentBudget": "\(returnedDict["currentBudget"]!)" as AnyObject,
-                                "currentSpent": "\(returnedDict["currentSpent"]!)" as AnyObject,
-                                "currentCashSpent": "\(returnedDict["currentCashSpent"]!)" as AnyObject,
-                                "currentCreditSpent": "\(returnedDict["currentCreditSpent"]!)" as AnyObject]
+                var userDict = [String: AnyObject]()
+                
+                if returnedDict["name"] != nil {
+                    userDict["name"] = "\(returnedDict["name"]!)" as AnyObject
+                }
+                
+                if returnedDict["currentBudget"] != nil {
+                    userDict["currentBudget"] = "\(returnedDict["currentBudget"]!)" as AnyObject
+                }
+                
+                if returnedDict["currentSpent"] != nil {
+                    userDict["currentSpent"] = "\(returnedDict["currentSpent"]!)" as AnyObject
+                }
+                
+                if returnedDict["currentCashSpent"] != nil {
+                    userDict["currentCashSpent"] = "\(returnedDict["currentCashSpent"]!)" as AnyObject
+                }
+                
+                if returnedDict["currentCreditSpent"] != nil {
+                    userDict["currentCreditSpent"] = "\(returnedDict["currentCreditSpent"]!)" as AnyObject
+                }
                 
                 if returnedDict["historicalPeriods"] != nil {
                     userDict["historicalPeriods"] = "\(returnedDict["historicalPeriods"]!)" as AnyObject?
                 }
                 
-                Alamofire.request("\(returnedDict["imageURL"]!)").responseData { response in
-                    if let data = response.result.value {
-                        userDict["userImage"] =  UIImage(data: data, scale:1)!
-                    } else {
-                        userDict["userImage"] =  UIImage(named: "no_img")!
-                    }
+                if returnedDict["imageURL"] != nil {
+                    userDict["imageURL"] = "\(returnedDict["imageURL"]!)" as AnyObject
                     
-                    userDictArray.append(userDict)
-                    
-                    if userDictArray.count == userArray.count {
-                        completion(userDictArray)
+                    Alamofire.request("\(returnedDict["imageURL"]!)").responseData { response in
+                        if let data = response.result.value {
+                            userDict["userImage"] =  UIImage(data: data, scale:1)!
+                        }
+                        
+                        userDictArray.append(userDict)
+                        
+                        if userDictArray.count == userArray.count {
+                            completion(userDictArray)
+                        }
                     }
+                } else {
+                    userDict["userImage"] =  UIImage(named: "no_img")!
                 }
             })
         }
@@ -172,9 +193,8 @@ class UserService {
     func login(email: String, password: String, completion:@escaping (_ result: String) -> Void) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             
-            
+            self.defaults.set(true, forKey: "isLoggedIn")
             completion("done")
-//            completion("error")
         }
     }
     

@@ -55,12 +55,23 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             print(result)
             
-            if result["users"]! != "" {
-                UserService.us.getUserData(userString: result["users"]!) {
+            if result["groupUsers"]! != "" {
+                UserService.us.getUserData(userString: result["groupUsers"]!) {
                     (resultUsers: [[String: AnyObject]]) in
                     
                     print(resultUsers)
                     
+                    for eachUser in resultUsers {
+                        let modelUser = UserModel.init(user: eachUser)
+                        self.users.append(modelUser)
+                    }
+                    
+                    self.tableView.reloadData()
+                    
+                    self.hideShowViews(toHide: false)
+                    
+                    self.loadingIndicator.isHidden = true
+                    self.loadingIndicator.stopAnimating()
                     
                 }
             } else {
@@ -141,8 +152,23 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTVC") as? SettingsTableViewCell {
-            cell.settingActionLabel.text = UserService.us.settingsArray()[indexPath.row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyTVC") as? FamilyTableViewCell {
+            let aUser = users[indexPath.row]
+            
+            var budgetStatusImage: UIImage?
+            
+            if Double(aUser.periodBudget)! < Double(aUser.periodCashSpent)! + Double(aUser.periodCreditSpent)! {
+                budgetStatusImage = UIImage(named: "caution")
+            } else {
+                budgetStatusImage = UIImage(named: "logo")
+            }
+            
+            cell.userImageView.image = aUser.userImage
+            cell.budgetStatusImageView.image = budgetStatusImage
+            cell.nameLabel.text = "\(aUser.name)"
+            cell.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodBudget)!))"
+            cell.cashLabel.text = "Cash Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCashSpent)!))"
+            cell.creditLabel.text = "Credit Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCreditSpent)!))"
             
             return cell
         }

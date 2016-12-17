@@ -48,28 +48,45 @@ class UserModel {
     }
     
     init(user: [String: AnyObject]) {
+        
         if let nameRetrieved = user["name"] {
             self._name = "\(nameRetrieved)"
+        } else {
+            self._name = ""
         }
         
         if let periodBudgetRetrieved = user["periodBudget"] {
             self._periodBudget = "\(periodBudgetRetrieved)"
+        } else {
+            self._periodBudget = "0.00"
         }
         
         if let periodTotalSpentRetrieved = user["periodTotalSpent"] {
             self._periodTotalSpent = "\(periodTotalSpentRetrieved)"
+        } else {
+            self._periodTotalSpent = "0.00"
         }
         
         if let periodCashSpentRetrieved = user["periodCashSpent"] {
             self._periodCashSpent = "\(periodCashSpentRetrieved)"
+        } else {
+            self._periodCashSpent = "0.00"
         }
         
         if let periodCreditSpentRetrieved = user["periodCreditSpent"] {
             self._periodCreditSpent = "\(periodCreditSpentRetrieved)"
+        } else {
+            self._periodCreditSpent = "0.00"
         }
         
         if let imageURLRetrieved = user["imageURL"] {
             self._imageURL = "\(imageURLRetrieved)"
+        }
+        
+        if let imageRetrieved = user["userImage"] {
+            self._userImage = imageRetrieved as! UIImage
+        } else {
+            self._userImage = UIImage(named: "no_img")
         }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035655171E04BE4600472751 /* ImageViewRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035655161E04BE4600472751 /* ImageViewRound.swift */; };
+		035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035655181E04BE8A00472751 /* ImageViewRadius.swift */; };
 		035C29891E0417DC00CD530F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C29881E0417DC00CD530F /* UserService.swift */; };
 		035C298B1E04184A00CD530F /* HistoricalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C298A1E04184A00CD530F /* HistoricalModel.swift */; };
 		035C298F1E041A4700CD530F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035C298E1E041A4700CD530F /* GoogleService-Info.plist */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035655161E04BE4600472751 /* ImageViewRound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewRound.swift; sourceTree = "<group>"; };
+		035655181E04BE8A00472751 /* ImageViewRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewRadius.swift; sourceTree = "<group>"; };
 		035C29881E0417DC00CD530F /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		035C298A1E04184A00CD530F /* HistoricalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalModel.swift; sourceTree = "<group>"; };
 		035C298E1E041A4700CD530F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 			children = (
 				03979CE61DFC4A6800855574 /* ButtonBlackBorderRadius.swift */,
 				035C29921E0429C400CD530F /* ButtonRadius.swift */,
+				035655161E04BE4600472751 /* ImageViewRound.swift */,
+				035655181E04BE8A00472751 /* ImageViewRadius.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -479,9 +485,11 @@
 				035FB4971E0376C2006BF437 /* SettingsViewController.swift in Sources */,
 				035C29911E041C8600CD530F /* Constants.swift in Sources */,
 				035FB49E1E037731006BF437 /* ProfileTableViewCell.swift in Sources */,
+				035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */,
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
 				035C29891E0417DC00CD530F /* UserService.swift in Sources */,
 				035FB4991E0376F0006BF437 /* CreateUserViewController.swift in Sources */,
+				035655171E04BE4600472751 /* ImageViewRound.swift in Sources */,
 				035C298B1E04184A00CD530F /* HistoricalModel.swift in Sources */,
 				03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */,
 				037C3D961E022CB0001AAFEE /* FamilyViewController.swift in Sources */,
