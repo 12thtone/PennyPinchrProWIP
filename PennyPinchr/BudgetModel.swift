@@ -12,28 +12,33 @@ import CoreData
 class BudgetModel {
     
     private var _budget: String!
+    private var _budgetID: String!
     private var _spent: String!
-    private var _cashSpent: String!
-    private var _creditSpent: String!
+    private var _spentCash: String!
+    private var _spentCredit: String!
     
     var budget: String {
         return _budget
+    }
+    
+    var budgetID: String {
+        return _budgetID
     }
     
     var spent: String {
         return _spent
     }
     
-    var cashSpent: String {
-        return _cashSpent
+    var spentCash: String {
+        return _spentCash
     }
     
-    var creditSpent: String {
-        return _creditSpent
+    var spentCredit: String {
+        return _spentCredit
     }
     
-    init(curBudget: [String: String]) {
-        if let currentBudget = curBudget["currentBudget"] {
+    init(budget: [String: String]) {
+        if let currentBudget = budget["budget"] {
             if currentBudget != "" {
                 self._budget = "\(currentBudget)"
             } else {
@@ -43,7 +48,17 @@ class BudgetModel {
             self._budget = "0.00"
         }
         
-        if let currentSpent = curBudget["currentSpent"] {
+        if let currentBudgetID = budget["budgetID"] {
+            if currentBudgetID != "" {
+                self._budgetID = "\(currentBudgetID)"
+            } else {
+                self._budgetID = "0.00"
+            }
+        } else {
+            self._budgetID = "0.00"
+        }
+        
+        if let currentSpent = budget["spent"] {
             if currentSpent != "" {
                 self._spent = "\(currentSpent)"
             } else {
@@ -53,24 +68,24 @@ class BudgetModel {
             self._spent = "0.00"
         }
         
-        if let currentCashSpent = curBudget["currentSpentCash"] {
-            if currentCashSpent != "" {
-                self._cashSpent = "\(currentCashSpent)"
+        if let currentSpentCash = budget["spentCash"] {
+            if currentSpentCash != "" {
+                self._spentCash = "\(currentSpentCash)"
             } else {
-                self._cashSpent = "0.00"
+                self._spentCash = "0.00"
             }
         } else {
-            self._cashSpent = "0.00"
+            self._spentCash = "0.00"
         }
         
-        if let currentCreditSpent = curBudget["currentSpentCredit"] {
-            if currentCreditSpent != "" {
-                self._creditSpent = "\(currentCreditSpent)"
+        if let currentSpentCredit = budget["spentCredit"] {
+            if currentSpentCredit != "" {
+                self._spentCredit = "\(currentSpentCredit)"
             } else {
-                self._creditSpent = "0.00"
+                self._spentCredit = "0.00"
             }
         } else {
-            self._creditSpent = "0.00"
+            self._spentCredit = "0.00"
         }
     }
 }

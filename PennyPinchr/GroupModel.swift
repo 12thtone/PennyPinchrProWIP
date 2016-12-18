@@ -1,25 +1,33 @@
 //
-//  SessionModel.swift
+//  GroupModel.swift
 //  PennyPinchr
 //
-//  Created by Matt Maher on 12/11/16.
+//  Created by Matt Maher on 12/18/16.
 //  Copyright © 2016 MMMD. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class SessionModel {
+class GroupModel {
     
-    private var _date: String!
+    private var _groupName: String!
+    private var _groupID: String!
+    private var _budget: String!
     private var _spent: String!
     private var _spentCash: String!
     private var _spentCredit: String!
-    private var _budget: String!
-    private var _budgetID: String!
     
-    var date: String {
-        return _date
+    var groupName: String {
+        return _groupName
+    }
+    
+    var groupID: String {
+        return _groupID
+    }
+    
+    var budget: String {
+        return _budget
     }
     
     var spent: String {
@@ -34,18 +42,18 @@ class SessionModel {
         return _spentCredit
     }
     
-    var budget: String {
-        return _budget
-    }
-    
-    var budgetID: String {
-        return _budgetID
-    }
-    
     init(session: NSManagedObject) {
         
-        if let indDate = session.value(forKey: "date") {
-            self._date = "\(indDate)"
+        if let indGroupName = session.value(forKey: "groupName") {
+            self._groupName = "\(indGroupName)"
+        }
+        
+        if let indGroupID = session.value(forKey: "groupID") {
+            self._groupID = "\(indGroupID)"
+        }
+        
+        if let indBudget = session.value(forKey: "budget") {
+            self._budget = "\(indBudget)"
         }
         
         if let indSpent = session.value(forKey: "spent") {
@@ -58,14 +66,6 @@ class SessionModel {
         
         if let indSpentCredit = session.value(forKey: "spentCredit") {
             self._spentCredit = "\(indSpentCredit)"
-        }
-        
-        if let indBudget = session.value(forKey: "budget") {
-            self._budget = "\(indBudget)"
-        }
-        
-        if let indBudgetID = session.value(forKey: "budgetID") {
-            self._budgetID = "\(indBudgetID)"
         }
     }
 }

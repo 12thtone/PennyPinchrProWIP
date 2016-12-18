@@ -12,31 +12,53 @@ import Firebase
 class UserModel {
     
     private var _name: String!
-    private var _periodBudget: String!
-    private var _periodTotalSpent: String!
-    private var _periodCashSpent: String!
-    private var _periodCreditSpent: String!
+    private var _spent: String!
+    private var _spentCash: String!
+    private var _spentCredit: String!
+    
+    ////
+    
+    private var _email: String!
+    private var _prefGroup: String!
+    private var _userGroups: String!
+    private var _userBudgets: String!
     private var _imageURL: String!
     private var _userImage: UIImage!
+    private var _userID: String!
+    private var _userSessions: String!
     
     var name: String {
         return _name
     }
     
-    var periodBudget: String {
-        return _periodBudget
+    var spent: String {
+        return _spent
     }
     
-    var periodTotalSpent: String {
-        return _periodTotalSpent
+    var spentCash: String {
+        return _spentCash
     }
     
-    var periodCashSpent: String {
-        return _periodCashSpent
+    var spentCredit: String {
+        return _spentCredit
     }
     
-    var periodCreditSpent: String {
-        return _periodCreditSpent
+    ////
+    
+    var email: String {
+        return _email
+    }
+    
+    var prefGroup: String {
+        return _prefGroup
+    }
+    
+    var userGroups: String {
+        return _userGroups
+    }
+    
+    var userBudgets: String {
+        return _userBudgets
     }
     
     var imageURL: String {
@@ -47,6 +69,14 @@ class UserModel {
         return _userImage
     }
     
+    var userID: String {
+        return _userID
+    }
+    
+    var userSessions: String {
+        return _userSessions
+    }
+    
     init(user: [String: AnyObject]) {
         
         if let nameRetrieved = user["name"] {
@@ -55,38 +85,52 @@ class UserModel {
             self._name = ""
         }
         
-        if let periodBudgetRetrieved = user["periodBudget"] {
-            self._periodBudget = "\(periodBudgetRetrieved)"
+        if let emailRetrieved = user["email"] {
+            self._email = "\(emailRetrieved)"
         } else {
-            self._periodBudget = "0.00"
+            self._email = ""
         }
         
-        if let periodTotalSpentRetrieved = user["periodTotalSpent"] {
-            self._periodTotalSpent = "\(periodTotalSpentRetrieved)"
+        if let prefGroupRetrieved = user["prefGroup"] {
+            self._prefGroup = "\(prefGroupRetrieved)"
         } else {
-            self._periodTotalSpent = "0.00"
+            self._prefGroup = ""
         }
         
-        if let periodCashSpentRetrieved = user["periodCashSpent"] {
-            self._periodCashSpent = "\(periodCashSpentRetrieved)"
+        if let userGroupsRetrieved = user["userGroups"] {
+            self._userGroups = "\(userGroupsRetrieved)"
         } else {
-            self._periodCashSpent = "0.00"
+            self._userGroups = ""
         }
         
-        if let periodCreditSpentRetrieved = user["periodCreditSpent"] {
-            self._periodCreditSpent = "\(periodCreditSpentRetrieved)"
+        if let userBudgetsRetrieved = user["userBudgets"] {
+            self._userBudgets = "\(userBudgetsRetrieved)"
         } else {
-            self._periodCreditSpent = "0.00"
+            self._userBudgets = ""
         }
         
         if let imageURLRetrieved = user["imageURL"] {
             self._imageURL = "\(imageURLRetrieved)"
+        } else {
+            self._imageURL = ""
         }
         
-        if let imageRetrieved = user["userImage"] {
-            self._userImage = imageRetrieved as! UIImage
+        if let userImageRetrieved = user["userImage"] {
+            self._userImage = userImageRetrieved as! UIImage
         } else {
             self._userImage = UIImage(named: "no_img")
+        }
+        
+        if let userIDRetrieved = user["userID"] {
+            self._userID = "\(userIDRetrieved)"
+        } else {
+            self._userID = ""
+        }
+        
+        if let userSessionsRetrieved = user["userSessions"] {
+            self._userSessions = "\(userSessionsRetrieved)"
+        } else {
+            self._userSessions = ""
         }
     }
 }

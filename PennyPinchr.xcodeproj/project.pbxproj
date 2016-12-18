@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		035655171E04BE4600472751 /* ImageViewRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035655161E04BE4600472751 /* ImageViewRound.swift */; };
 		035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035655181E04BE8A00472751 /* ImageViewRadius.swift */; };
-		035C29891E0417DC00CD530F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C29881E0417DC00CD530F /* UserService.swift */; };
-		035C298B1E04184A00CD530F /* HistoricalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C298A1E04184A00CD530F /* HistoricalModel.swift */; };
 		035C298F1E041A4700CD530F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035C298E1E041A4700CD530F /* GoogleService-Info.plist */; };
 		035C29911E041C8600CD530F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C29901E041C8600CD530F /* Constants.swift */; };
 		035C29931E0429C400CD530F /* ButtonRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035C29921E0429C400CD530F /* ButtonRadius.swift */; };
@@ -34,6 +32,9 @@
 		03979CE91DFC5E3100855574 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CE81DFC5E3100855574 /* HomeViewController.swift */; };
 		03979CF01DFC64C800855574 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CEF1DFC64C800855574 /* HomeTableViewCell.swift */; };
 		03979CF41DFC6BD000855574 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03979CF11DFC684000855574 /* DataModel.xcdatamodeld */; };
+		03B15DB81E072066000797D5 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DB71E072066000797D5 /* GroupModel.swift */; };
+		03B15DBA1E072DD1000797D5 /* HelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DB91E072DD1000797D5 /* HelperService.swift */; };
+		03B15DBC1E074BE4000797D5 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DBB1E074BE4000797D5 /* AuthViewController.swift */; };
 		03CD1DAA1DFDBBAA00CFECC8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD1DA91DFDBBAA00CFECC8 /* DataService.swift */; };
 		03CD1DAE1DFDC67C00CFECC8 /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */; };
 		03D5C7031DFEF4A600E4484E /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D5C7021DFEF4A600E4484E /* BudgetModel.swift */; };
@@ -60,8 +61,6 @@
 /* Begin PBXFileReference section */
 		035655161E04BE4600472751 /* ImageViewRound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewRound.swift; sourceTree = "<group>"; };
 		035655181E04BE8A00472751 /* ImageViewRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewRadius.swift; sourceTree = "<group>"; };
-		035C29881E0417DC00CD530F /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		035C298A1E04184A00CD530F /* HistoricalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalModel.swift; sourceTree = "<group>"; };
 		035C298E1E041A4700CD530F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		035C29901E041C8600CD530F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		035C29921E0429C400CD530F /* ButtonRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonRadius.swift; sourceTree = "<group>"; };
@@ -91,6 +90,9 @@
 		03979CE81DFC5E3100855574 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		03979CEF1DFC64C800855574 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		03979CF21DFC684000855574 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		03B15DB71E072066000797D5 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		03B15DB91E072DD1000797D5 /* HelperService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperService.swift; sourceTree = "<group>"; };
+		03B15DBB1E074BE4000797D5 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		03CD1DA91DFDBBAA00CFECC8 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		03D5C7021DFEF4A600E4484E /* BudgetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
@@ -140,17 +142,18 @@
 				035FB4981E0376F0006BF437 /* CreateUserViewController.swift */,
 				035FB49B1E03771C006BF437 /* ProfileViewController.swift */,
 				035FB49D1E037731006BF437 /* ProfileTableViewCell.swift */,
+				03B15DBB1E074BE4000797D5 /* AuthViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
 		};
-		037C3D941E022C7F001AAFEE /* Family */ = {
+		037C3D941E022C7F001AAFEE /* Group */ = {
 			isa = PBXGroup;
 			children = (
 				037C3D951E022CB0001AAFEE /* FamilyViewController.swift */,
 				037C3D971E022CC2001AAFEE /* FamilyTableViewCell.swift */,
 			);
-			name = Family;
+			name = Group;
 			sourceTree = "<group>";
 		};
 		03979CAA1DFB1AA100855574 = {
@@ -183,7 +186,7 @@
 				035FB4931E037696006BF437 /* Settings */,
 				03979CEB1DFC63AD00855574 /* Home */,
 				03979CEC1DFC63B800855574 /* ShoppingSession */,
-				037C3D941E022C7F001AAFEE /* Family */,
+				037C3D941E022C7F001AAFEE /* Group */,
 				03979CED1DFC640A00855574 /* Model */,
 				03979CEE1DFC641B00855574 /* Service */,
 				03979CBA1DFB1AA100855574 /* Main.storyboard */,
@@ -251,7 +254,7 @@
 				03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */,
 				03D5C7021DFEF4A600E4484E /* BudgetModel.swift */,
 				035FB4A11E037DEA006BF437 /* UserModel.swift */,
-				035C298A1E04184A00CD530F /* HistoricalModel.swift */,
+				03B15DB71E072066000797D5 /* GroupModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -260,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				03CD1DA91DFDBBAA00CFECC8 /* DataService.swift */,
-				035C29881E0417DC00CD530F /* UserService.swift */,
+				03B15DB91E072DD1000797D5 /* HelperService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -487,11 +490,12 @@
 				035FB49E1E037731006BF437 /* ProfileTableViewCell.swift in Sources */,
 				035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */,
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
-				035C29891E0417DC00CD530F /* UserService.swift in Sources */,
+				03B15DB81E072066000797D5 /* GroupModel.swift in Sources */,
+				03B15DBC1E074BE4000797D5 /* AuthViewController.swift in Sources */,
 				035FB4991E0376F0006BF437 /* CreateUserViewController.swift in Sources */,
 				035655171E04BE4600472751 /* ImageViewRound.swift in Sources */,
-				035C298B1E04184A00CD530F /* HistoricalModel.swift in Sources */,
 				03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */,
+				03B15DBA1E072DD1000797D5 /* HelperService.swift in Sources */,
 				037C3D961E022CB0001AAFEE /* FamilyViewController.swift in Sources */,
 				035FB4A21E037DEA006BF437 /* UserModel.swift in Sources */,
 				03CD1DAA1DFDBBAA00CFECC8 /* DataService.swift in Sources */,

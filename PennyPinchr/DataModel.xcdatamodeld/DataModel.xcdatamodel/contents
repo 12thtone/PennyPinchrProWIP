@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Budget" representedClassName="Budget" syncable="YES" codeGenerationType="class">
+        <attribute name="budget" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="budgetID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="currentBudget" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="currentSpent" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="currentSpentCash" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="currentSpentCredit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCredit" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES" codeGenerationType="class">
         <attribute name="budget" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cashSpent" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="creditSpent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalSpent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="groupName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCredit" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
         <attribute name="budget" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cash" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parentBudget" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sessionID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="total" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spentCredit" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="budgets" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="groups" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="prefGroup" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sessions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userBudgets" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userGroups" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userSessions" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Budget" positionX="-63" positionY="18" width="128" height="120"/>
         <element name="Session" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="User" positionX="-63" positionY="27" width="128" height="165"/>
-        <element name="Group" positionX="-45" positionY="72" width="128" height="120"/>
+        <element name="User" positionX="-63" positionY="27" width="128" height="30"/>
+        <element name="Group" positionX="-45" positionY="72" width="128" height="30"/>
     </elements>
 </model>
