@@ -15,6 +15,7 @@ protocol SessionDelegate {
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SessionDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var budgetLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
