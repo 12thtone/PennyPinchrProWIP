@@ -590,15 +590,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-Xy-J90" customClass="ImageViewRadius" customModule="PennyPinchr" customModuleProvider="target">
-                                <rect key="frame" x="16" y="28" width="70" height="70"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-Xy-J90" customClass="ImageViewRadius" customModule="PennyPinchr" customModuleProvider="target">
+                                <rect key="frame" x="16" y="72" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="JEH-hW-eCI"/>
                                     <constraint firstAttribute="height" constant="70" id="xe6-36-Ndl"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7G-Wm-ZRM">
-                                <rect key="frame" x="94" y="68" width="265" height="30"/>
+                                <rect key="frame" x="94" y="112" width="265" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="47A-Id-CrQ"/>
                                 </constraints>
@@ -607,19 +607,19 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give the image a tap to choose a profile picture. Then, allocate some budget money! Also, welcome to" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zi4-3T-UUN">
-                                <rect key="frame" x="16" y="106" width="343" height="21"/>
+                                <rect key="frame" x="16" y="150" width="343" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name_logo" translatesAutoresizingMaskIntoConstraints="NO" id="sO0-FW-XPI">
-                                <rect key="frame" x="16" y="135" width="343" height="81"/>
+                                <rect key="frame" x="16" y="179" width="343" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sO0-FW-XPI" secondAttribute="height" multiplier="343:81" id="LvY-Hh-iRv"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4To-tQ-0v5">
-                                <rect key="frame" x="329" y="30" width="30" height="30"/>
+                                <rect key="frame" x="329" y="74" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WcO-Hu-Wsv"/>
                                     <constraint firstAttribute="width" constant="30" id="lMB-66-hvJ"/>
@@ -648,6 +648,18 @@
                             <constraint firstItem="sO0-FW-XPI" firstAttribute="top" secondItem="zi4-3T-UUN" secondAttribute="bottom" constant="8" id="uAf-iC-Jas"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Z3T-Ch-hJu">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="rqJ-x4-piz">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XVU-zf-Il7">
+                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="cancel"/>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="FM5-Zd-exA" eventType="touchUpInside" id="z6H-Lz-s5V"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nameField" destination="s7G-Wm-ZRM" id="ka2-99-BEE"/>
                         <outlet property="userImageView" destination="jdd-Xy-J90" id="Ock-O5-09Z"/>
@@ -655,7 +667,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tz3-hJ-yxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="932.38380809595208"/>
+            <point key="canvasLocation" x="2359" y="932"/>
         </scene>
         <!--Settings-->
         <scene sceneID="IDI-xH-5x2">
@@ -731,22 +743,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="3EE-VJ-Jwm" customClass="ImageViewRadius" customModule="PennyPinchr" customModuleProvider="target">
-                                <rect key="frame" x="16" y="28" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="3EE-VJ-Jwm" customClass="ImageViewRadius" customModule="PennyPinchr" customModuleProvider="target">
+                                <rect key="frame" x="16" y="72" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="IN1-Zi-1CV"/>
                                     <constraint firstAttribute="height" constant="100" id="yK9-ha-tKf"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="NBy-zf-BpT">
-                                <rect key="frame" x="299" y="48" width="60" height="60"/>
+                                <rect key="frame" x="299" y="92" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="gp3-iS-ozp"/>
                                     <constraint firstAttribute="height" constant="60" id="ivQ-g5-zBX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Namejq" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-bg-dAy">
-                                <rect key="frame" x="16" y="136" width="59" height="20"/>
+                                <rect key="frame" x="16" y="180" width="59" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="bq4-s6-29g"/>
                                 </constraints>
@@ -755,7 +767,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soft Budget for Period: $4,000,000,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3R-bF-Bu7">
-                                <rect key="frame" x="16" y="158" width="298" height="20"/>
+                                <rect key="frame" x="16" y="202" width="298" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ayU-pw-2Yx"/>
                                 </constraints>
@@ -831,7 +843,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZP-Mo-haS">
-                                <rect key="frame" x="322" y="149" width="37" height="37"/>
+                                <rect key="frame" x="322" y="193" width="37" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="ALB-q3-kC6"/>
                                     <constraint firstAttribute="width" constant="37" id="L52-gZ-QCk"/>
@@ -861,6 +873,18 @@
                             <constraint firstItem="nFQ-GG-ICG" firstAttribute="leading" secondItem="Fmm-IY-oo3" secondAttribute="leading" id="zZi-RL-5oD"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="pWN-Ne-u8c">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="6sJ-Mc-hdU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mO0-Np-PYw">
+                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="cancel"/>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="DPV-La-UIF" eventType="touchUpInside" id="kZC-Aq-U2i"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="budgetStatusImageView" destination="NBy-zf-BpT" id="TPw-7b-fne"/>
                         <outlet property="editBudgetButton" destination="CZP-Mo-haS" id="ZVt-ZA-jep"/>
@@ -872,7 +896,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MV-uN-KvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="203.74812593703149"/>
+            <point key="canvasLocation" x="2345" y="204"/>
         </scene>
         <!--Reports-->
         <scene sceneID="VDZ-vF-mnS">
@@ -1161,6 +1185,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7f1-l5-4IU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="-546.47676161919048"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LZ6-eB-4OM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IeS-Km-Nx0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTt-72-4La">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DPV-La-UIF" kind="relationship" relationship="rootViewController" id="FXq-QX-fni"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VwM-7p-16m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628" y="203.74812593703149"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Svf-Jc-IDl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UD9-4z-Jnb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pAP-Xd-gBj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FM5-Zd-exA" kind="relationship" relationship="rootViewController" id="RkA-nP-J5M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwj-Wl-CzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628" y="932.38380809595208"/>
         </scene>
     </scenes>
     <resources>

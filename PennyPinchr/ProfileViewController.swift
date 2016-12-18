@@ -55,4 +55,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func editBudgetTapped(_ sender: Any) {
         
     }
+    
+    @IBAction func cancelTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

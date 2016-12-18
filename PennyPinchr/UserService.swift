@@ -72,7 +72,7 @@ class UserService {
             if error == nil {
                 let newUsers = "\(self.allUsers)\(ref.key),"
                 
-                FB_DATABASE_REF.child("accounts").child("users").setValue(newUsers) { (error, ref) -> Void in
+                FB_DATABASE_REF.child("accounts").child(self.groupID).child("groupUsers").setValue(newUsers) { (error, ref) -> Void in
                     
                     if error == nil {
                         completion("done")
@@ -82,6 +82,24 @@ class UserService {
                 }
             } else {
                 completion("error")
+            }
+        }
+    }
+    
+    func saveUserImage(imageToSave: UIImage, completion:@escaping (_ result: String) -> Void) {
+        let randomNumber = Int(arc4random_uniform(9999999))
+        
+        let imageId = "\(groupID)-\(randomNumber)"
+        let newPath = "/profile-image/\(imageId).jpg"
+        
+        let imageData = UIImageJPEGRepresentation(imageToSave , 0.1)
+        
+        FB_STORAGE_REF.child(newPath).put(imageData!, metadata: nil) { metadata, error in
+            if (error != nil) {
+                completion("error")
+            } else {
+                let downloadURL = metadata!.downloadURL()!.absoluteString
+                completion(downloadURL)
             }
         }
     }
@@ -134,7 +152,7 @@ class UserService {
     func getUserData(userString: String, completion:@escaping (_ result: [[String: AnyObject]]) -> Void) {
         var userDictArray = [[String: AnyObject]]()
         var userArray = userString.components(separatedBy: ",")
-        userArray.removeLast()
+//        userArray.removeLast()
         
         for user in userArray {
             
