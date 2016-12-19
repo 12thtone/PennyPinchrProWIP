@@ -1,5 +1,5 @@
 //
-//  FamilyViewController.swift
+//  GroupViewController.swift
 //  PennyPinchr
 //
 //  Created by Matt Maher on 12/14/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var percentSpentLabel: UILabel!
@@ -35,6 +35,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             loadingIndicator.startAnimating()
             
             loadGroupUsers()
+        } else {
+            let authVC = self.storyboard?.instantiateViewController(withIdentifier: "AuthVC") as! AuthViewController
+            let navController = UINavigationController(rootViewController: authVC)
+            
+            self.present(navController, animated: true, completion: nil)
         }
     }
 

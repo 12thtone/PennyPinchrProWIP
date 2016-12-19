@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NewSessionViewController.swift
 //  PennyPinchr
 //
 //  Created by Matt Maher on 12/9/16.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var moneyField: UITextField!
     @IBOutlet weak var spentLabel: UILabel!

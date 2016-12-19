@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="It1-7i-5vl">
             <objects>
-                <viewController id="Rd7-7u-ber" customClass="HomeViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Rd7-7u-ber" customClass="SessionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dyp-aT-eil"/>
                         <viewControllerLayoutGuide type="bottom" id="sAa-WE-ImM"/>
@@ -35,7 +35,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeTableViewCell" rowHeight="93" id="sO3-KC-8PQ" customClass="HomeTableViewCell" customModule="PennyPinchr" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SessionTVC" rowHeight="93" id="sO3-KC-8PQ" customClass="SessionTableViewCell">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sO3-KC-8PQ" id="mwD-YG-T2G">
@@ -243,10 +243,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="-546.47676161919048"/>
         </scene>
-        <!--Family View Controller-->
+        <!--Group View Controller-->
         <scene sceneID="IZm-XZ-t0W">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="m7c-c0-BBG" customClass="FamilyViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="m7c-c0-BBG" customClass="GroupViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fgj-HJ-ThA"/>
                         <viewControllerLayoutGuide type="bottom" id="GQc-fp-LWi"/>
@@ -265,7 +265,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FamilyTVC" rowHeight="100" id="pOc-Sg-tbt" customClass="FamilyTableViewCell" customModule="PennyPinchr" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupTVC" rowHeight="100" id="pOc-Sg-tbt" customClass="GroupTableViewCell" customModule="PennyPinchr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pOc-Sg-tbt" id="Ja1-fy-fsz">
@@ -432,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="901.60000000000002" y="203.74812593703149"/>
         </scene>
-        <!--Create User View Controller-->
+        <!--New Group-->
         <scene sceneID="7LS-sG-lSp">
             <objects>
-                <viewController storyboardIdentifier="CreateUserVC" id="FM5-Zd-exA" customClass="CreateUserViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateGroupVC" id="FM5-Zd-exA" customClass="CreateGroupViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B2W-ra-igB"/>
                         <viewControllerLayoutGuide type="bottom" id="P2x-3k-aMr"/>
@@ -451,7 +451,7 @@
                                     <constraint firstAttribute="height" constant="70" id="xe6-36-Ndl"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7G-Wm-ZRM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Group Name:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7G-Wm-ZRM">
                                 <rect key="frame" x="94" y="112" width="265" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="47A-Id-CrQ"/>
@@ -502,7 +502,7 @@
                             <constraint firstItem="sO0-FW-XPI" firstAttribute="top" secondItem="zi4-3T-UUN" secondAttribute="bottom" constant="8" id="uAf-iC-Jas"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Z3T-Ch-hJu">
+                    <navigationItem key="navigationItem" title="New Group" id="Z3T-Ch-hJu">
                         <barButtonItem key="leftBarButtonItem" style="done" id="rqJ-x4-piz">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XVU-zf-Il7">
                                 <rect key="frame" x="16" y="7" width="30" height="30"/>
@@ -526,7 +526,7 @@
         <!--Auth View Controller-->
         <scene sceneID="lgn-uT-Ubs">
             <objects>
-                <viewController id="xHD-Lf-UBL" customClass="AuthViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthVC" id="xHD-Lf-UBL" customClass="AuthViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2vz-fR-373"/>
                         <viewControllerLayoutGuide type="bottom" id="tO1-of-TIO"/>
@@ -594,6 +594,9 @@
                                                 <state key="normal" title="LogIn">
                                                     <color key="titleColor" red="0.9882352941176471" green="0.050980392156862744" blue="0.10588235294117647" alpha="0.89897260273972601" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginTapped:" destination="xHD-Lf-UBL" eventType="touchUpInside" id="jnb-Uh-zVy"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVa-cY-MVC" customClass="ButtonRadius" customModule="PennyPinchr" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="139" width="359" height="30"/>
@@ -605,6 +608,9 @@
                                                 <state key="normal" title="SignUp">
                                                     <color key="titleColor" red="0.9882352941176471" green="0.050980392156862744" blue="0.10588235294117647" alpha="0.89897260273972601" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signupTapped:" destination="xHD-Lf-UBL" eventType="touchUpInside" id="0Hv-G0-NZB"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iG-sT-8N6">
                                                 <rect key="frame" x="8" y="177" width="359" height="30"/>
@@ -615,6 +621,9 @@
                                                 <state key="normal" title="Forgot Password">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="forgotPasswordTapped:" destination="xHD-Lf-UBL" eventType="touchUpInside" id="zoS-cm-ZwF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.89897260273972601" colorSpace="calibratedRGB"/>
@@ -677,6 +686,10 @@
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="emailField" destination="itS-cc-U4Y" id="C7v-Ah-zZj"/>
+                        <outlet property="passwordField" destination="qgp-Hi-eF6" id="gF5-oU-vw0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ejZ-h8-RVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

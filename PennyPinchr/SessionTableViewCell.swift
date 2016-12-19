@@ -1,19 +1,17 @@
 //
-//  FamilyTableViewCell.swift
+//  SessionTableViewCell.swift
 //  PennyPinchr
 //
-//  Created by Matt Maher on 12/14/16.
+//  Created by Matt Maher on 12/10/16.
 //  Copyright © 2016 MMMD. All rights reserved.
 //
 
 import UIKit
 
-class FamilyTableViewCell: UITableViewCell {
+class SessionTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var budgetStatusImageView: UIImageView!
-    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var cashLabel: UILabel!
     @IBOutlet weak var creditLabel: UILabel!
 

@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  SessionViewController.swift
 //  PennyPinchr
 //
 //  Created by Matt Maher on 12/10/16.
@@ -13,7 +13,7 @@ protocol SessionDelegate {
     func reloadSessions()
 }
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SessionDelegate, UITextFieldDelegate {
+class SessionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SessionDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!

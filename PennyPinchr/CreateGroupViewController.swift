@@ -1,5 +1,5 @@
 //
-//  CreateUserViewController.swift
+//  CreateGroupViewController.swift
 //  PennyPinchr
 //
 //  Created by Matt Maher on 12/15/16.
@@ -8,11 +8,15 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateGroupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameField: UITextField!
     
+    var isFromAuth = false
+    
+    var userName = ""
+    var email = ""
     var imageToSave: UIImage?
 
     override func viewDidLoad() {
@@ -76,7 +80,6 @@ class CreateUserViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func accessCamera() {
-        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
@@ -86,7 +89,6 @@ class CreateUserViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func accessPhotoLibrary() {
-        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
@@ -108,17 +110,10 @@ class CreateUserViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func saveUserTapped(_ sender: Any) {
         if imageToSave != nil && nameField.text != "" {
-            UserService.us.saveUserImage(imageToSave: imageToSave!) {
-                (result: String) in
-                
-                let userDict = ["name": self.nameField.text!,
-                                "imageURL": result]
-                
-                UserService.us.createUser(userDict: userDict) {
-                    (result: String) in
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
+            if isFromAuth {
+                completeSaveAuth()
+            } else {
+                completeSave()
             }
         } else {
             let alertController = UIAlertController(title: "Profile Info", message: "Please enter a name and an image to complete the profile.", preferredStyle: .actionSheet)
@@ -131,6 +126,22 @@ class CreateUserViewController: UIViewController, UIImagePickerControllerDelegat
             self.present(alertController, animated: true) {
                 
             }
+        }
+    }
+    
+    func completeSave() {
+        DataService.ds.saveUserGroup(groupName: nameField.text!) {
+            (result: String) in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func completeSaveAuth() {
+        DataService.ds.completeAccount(email: email, name: userName, image: imageToSave!, groupName: nameField.text!) {
+            (result: String) in
+            
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         }
     }
     
