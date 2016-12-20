@@ -21,6 +21,7 @@
 		037C3D921E022BF8001AAFEE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */; };
 		037C3D961E022CB0001AAFEE /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D951E022CB0001AAFEE /* GroupViewController.swift */; };
 		037C3D981E022CC2001AAFEE /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D971E022CC2001AAFEE /* GroupTableViewCell.swift */; };
+		03916FDD1E09A41D002A2E4F /* GroupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FDC1E09A41D002A2E4F /* GroupMemberModel.swift */; };
 		03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB61DFB1AA100855574 /* AppDelegate.swift */; };
 		03979CB91DFB1AA100855574 /* NewSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB81DFB1AA100855574 /* NewSessionViewController.swift */; };
 		03979CBC1DFB1AA100855574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03979CBA1DFB1AA100855574 /* Main.storyboard */; };
@@ -31,7 +32,6 @@
 		03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CE61DFC4A6800855574 /* ButtonBlackBorderRadius.swift */; };
 		03979CE91DFC5E3100855574 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CE81DFC5E3100855574 /* SessionViewController.swift */; };
 		03979CF01DFC64C800855574 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CEF1DFC64C800855574 /* SessionTableViewCell.swift */; };
-		03979CF41DFC6BD000855574 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03979CF11DFC684000855574 /* DataModel.xcdatamodeld */; };
 		03B15DB81E072066000797D5 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DB71E072066000797D5 /* GroupModel.swift */; };
 		03B15DBA1E072DD1000797D5 /* HelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DB91E072DD1000797D5 /* HelperService.swift */; };
 		03B15DBC1E074BE4000797D5 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B15DBB1E074BE4000797D5 /* AuthViewController.swift */; };
@@ -73,6 +73,7 @@
 		037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		037C3D951E022CB0001AAFEE /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		037C3D971E022CC2001AAFEE /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		03916FDC1E09A41D002A2E4F /* GroupMemberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberModel.swift; sourceTree = "<group>"; };
 		03979CB31DFB1AA100855574 /* PennyPinchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyPinchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03979CB61DFB1AA100855574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03979CB81DFB1AA100855574 /* NewSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		03979CE61DFC4A6800855574 /* ButtonBlackBorderRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBlackBorderRadius.swift; sourceTree = "<group>"; };
 		03979CE81DFC5E3100855574 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		03979CEF1DFC64C800855574 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
-		03979CF21DFC684000855574 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		03B15DB71E072066000797D5 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		03B15DB91E072DD1000797D5 /* HelperService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperService.swift; sourceTree = "<group>"; };
 		03B15DBB1E074BE4000797D5 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -250,11 +250,11 @@
 		03979CED1DFC640A00855574 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				03979CF11DFC684000855574 /* DataModel.xcdatamodeld */,
 				03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */,
 				03D5C7021DFEF4A600E4484E /* BudgetModel.swift */,
 				035FB4A11E037DEA006BF437 /* UserModel.swift */,
 				03B15DB71E072066000797D5 /* GroupModel.swift */,
+				03916FDC1E09A41D002A2E4F /* GroupMemberModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -482,7 +482,6 @@
 				035C29931E0429C400CD530F /* ButtonRadius.swift in Sources */,
 				035FB4951E0376AB006BF437 /* SettingsTableViewCell.swift in Sources */,
 				035FB49C1E03771C006BF437 /* ProfileViewController.swift in Sources */,
-				03979CF41DFC6BD000855574 /* DataModel.xcdatamodeld in Sources */,
 				037C3D921E022BF8001AAFEE /* MainTabBarViewController.swift in Sources */,
 				03979CB91DFB1AA100855574 /* NewSessionViewController.swift in Sources */,
 				035FB4971E0376C2006BF437 /* SettingsViewController.swift in Sources */,
@@ -492,6 +491,7 @@
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
 				03B15DB81E072066000797D5 /* GroupModel.swift in Sources */,
 				03B15DBC1E074BE4000797D5 /* AuthViewController.swift in Sources */,
+				03916FDD1E09A41D002A2E4F /* GroupMemberModel.swift in Sources */,
 				035FB4991E0376F0006BF437 /* CreateGroupViewController.swift in Sources */,
 				035655171E04BE4600472751 /* ImageViewRound.swift in Sources */,
 				03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */,
@@ -774,19 +774,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		03979CF11DFC684000855574 /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				03979CF21DFC684000855574 /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 03979CF21DFC684000855574 /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 03979CAB1DFB1AA100855574 /* Project object */;
 }

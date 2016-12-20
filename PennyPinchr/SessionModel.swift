@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 class SessionModel {
     
@@ -42,30 +41,42 @@ class SessionModel {
         return _budgetID
     }
     
-    init(session: NSManagedObject) {
+    init(session: [String: AnyObject]) {
         
-        if let indDate = session.value(forKey: "date") {
-            self._date = "\(indDate)"
+        if session["date"] != nil {
+            self._date = "\(session["date"]!)"
+        } else {
+            self._date = ""
         }
         
-        if let indSpent = session.value(forKey: "spent") {
-            self._spent = "\(indSpent)"
+        if session["spent"] != nil {
+            self._spent = "\(session["spent"]!)"
+        } else {
+            self._spent = ""
         }
         
-        if let indSpentCash = session.value(forKey: "spentCash") {
-            self._spentCash = "\(indSpentCash)"
+        if session["spentCash"] != nil {
+            self._spentCash = "\(session["spentCash"]!)"
+        } else {
+            self._spentCash = ""
         }
         
-        if let indSpentCredit = session.value(forKey: "spentCredit") {
-            self._spentCredit = "\(indSpentCredit)"
+        if session["spentCredit"] != nil {
+            self._spentCredit = "\(session["spentCredit"]!)"
+        } else {
+            self._spentCredit = ""
         }
         
-        if let indBudget = session.value(forKey: "budget") {
-            self._budget = "\(indBudget)"
+        if session["budget"] != nil {
+            self._budget = "\(session["budget"]!)"
+        } else {
+            self._budget = ""
         }
         
-        if let indBudgetID = session.value(forKey: "budgetID") {
-            self._budgetID = "\(indBudgetID)"
+        if session["budgetID"] != nil {
+            self._budgetID = "\(session["budgetID"]!)"
+        } else {
+            self._budgetID = ""
         }
     }
 }

@@ -49,52 +49,52 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadGroupUsers() {
-        DataService.ds.getAccountData() {
-            (result: [String: String]) in
-            
-            print(result)
-            
-            self.budget = BudgetModel(budget: result)
-            
-            var totalSpent = 0.0
-            var userBudget = 0.0
-            
-            if let tSpent = self.budget?.spent {
-                totalSpent = Double("\(tSpent)")!
-            }
-            
-            if let uBudget = self.budget?.budget {
-                userBudget = Double("\(uBudget)")!
-            }
-            
-            let percent = Int(totalSpent / userBudget)
-            
-            self.percentSpentLabel.text = "\(percent)% of Budget Spent"
-            
-            if result["groupUsers"]! != "" {
-                UserService.us.getUserData(userString: result["groupUsers"]!) {
-                    (resultUsers: [[String: AnyObject]]) in
-                    
-                    print(resultUsers)
-                    
-                    for eachUser in resultUsers {
-                        let modelUser = UserModel.init(user: eachUser)
-                        self.users.append(modelUser)
-                    }
-                    
-                    self.tableView.reloadData()
-                    
-                    self.hideShowViews(toHide: false)
-                    
-                    self.loadingIndicator.isHidden = true
-                    self.loadingIndicator.stopAnimating()
-                    
-                }
-            } else {
-                self.loadingIndicator.isHidden = true
-                self.loadingIndicator.stopAnimating()
-            }
-        }
+//        DataService.ds.getAccountData() {
+//            (result: [String: String]) in
+//            
+//            print(result)
+//            
+//            self.budget = BudgetModel(budget: result)
+//            
+//            var totalSpent = 0.0
+//            var userBudget = 0.0
+//            
+//            if let tSpent = self.budget?.spent {
+//                totalSpent = Double("\(tSpent)")!
+//            }
+//            
+//            if let uBudget = self.budget?.budget {
+//                userBudget = Double("\(uBudget)")!
+//            }
+//            
+//            let percent = Int(totalSpent / userBudget)
+//            
+//            self.percentSpentLabel.text = "\(percent)% of Budget Spent"
+//            
+//            if result["groupUsers"]! != "" {
+//                UserService.us.getUserData(userString: result["groupUsers"]!) {
+//                    (resultUsers: [[String: AnyObject]]) in
+//                    
+//                    print(resultUsers)
+//                    
+//                    for eachUser in resultUsers {
+//                        let modelUser = UserModel.init(user: eachUser)
+//                        self.users.append(modelUser)
+//                    }
+//                    
+//                    self.tableView.reloadData()
+//                    
+//                    self.hideShowViews(toHide: false)
+//                    
+//                    self.loadingIndicator.isHidden = true
+//                    self.loadingIndicator.stopAnimating()
+//                    
+//                }
+//            } else {
+//                self.loadingIndicator.isHidden = true
+//                self.loadingIndicator.stopAnimating()
+//            }
+//        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,23 +106,23 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyTVC") as? FamilyTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTVC") as? GroupTableViewCell {
             let aUser = users[indexPath.row]
             
             var budgetStatusImage: UIImage?
             
-            if Double(aUser.periodBudget)! < Double(aUser.periodCashSpent)! + Double(aUser.periodCreditSpent)! {
-                budgetStatusImage = UIImage(named: "caution")
-            } else {
-                budgetStatusImage = UIImage(named: "logo")
-            }
-            
-            cell.userImageView.image = aUser.userImage
-            cell.budgetStatusImageView.image = budgetStatusImage
-            cell.nameLabel.text = "\(aUser.name)"
-            cell.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodBudget)!))"
-            cell.cashLabel.text = "Cash Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCashSpent)!))"
-            cell.creditLabel.text = "Credit Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCreditSpent)!))"
+//            if Double(aUser.periodBudget)! < Double(aUser.periodCashSpent)! + Double(aUser.periodCreditSpent)! {
+//                budgetStatusImage = UIImage(named: "caution")
+//            } else {
+//                budgetStatusImage = UIImage(named: "logo")
+//            }
+//            
+//            cell.userImageView.image = aUser.userImage
+//            cell.budgetStatusImageView.image = budgetStatusImage
+//            cell.nameLabel.text = "\(aUser.name)"
+//            cell.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodBudget)!))"
+//            cell.cashLabel.text = "Cash Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCashSpent)!))"
+//            cell.creditLabel.text = "Credit Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCreditSpent)!))"
             
             return cell
         }

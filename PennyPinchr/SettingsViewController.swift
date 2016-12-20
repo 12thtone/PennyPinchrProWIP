@@ -29,12 +29,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserService.us.settingsArray().count
+        return HelperService.hs.settingsArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTVC") as? SettingsTableViewCell {
-            cell.settingActionLabel.text = UserService.us.settingsArray()[indexPath.row]
+            cell.settingActionLabel.text = HelperService.hs.settingsArray()[indexPath.row]
             
             return cell
         }
@@ -46,8 +46,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //        ["Add User", "Info", "Logout"]
         
         if indexPath.row == 0 {
-            let createUserVC = self.storyboard?.instantiateViewController(withIdentifier: "CreateUserVC") as! CreateUserViewController
-            let navController = UINavigationController(rootViewController: createUserVC)
+            let createGroupVC = self.storyboard?.instantiateViewController(withIdentifier: "CreateGroupVC") as! CreateGroupViewController
+            let navController = UINavigationController(rootViewController: createGroupVC)
             
             self.present(navController, animated: true, completion: nil)
         } else if indexPath.row == 1 {

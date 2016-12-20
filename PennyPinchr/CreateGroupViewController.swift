@@ -130,11 +130,11 @@ class CreateGroupViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func completeSave() {
-        DataService.ds.saveUserGroup(groupName: nameField.text!) {
-            (result: String) in
-            
-            self.dismiss(animated: true, completion: nil)
-        }
+//        DataService.ds.saveUserGroup(groupName: nameField.text!) {
+//            (result: String) in
+//            
+//            self.dismiss(animated: true, completion: nil)
+//        }
     }
     
     func completeSaveAuth() {

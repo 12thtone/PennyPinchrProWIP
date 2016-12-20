@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 protocol SessionDelegate {
     func reloadSessions()
@@ -22,8 +21,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var sessions = [SessionModel]()
     var budget: BudgetModel?
-    var savedSessions = [NSManagedObject]()
-    var savedBudget = [NSManagedObject]()
     
     var newUserAlertController = UIAlertController()
     var newPeriodAlertController = UIAlertController()
@@ -60,35 +57,22 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func loadData() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Session")
-        let fetchRequestBudget = NSFetchRequest<NSManagedObject>(entityName: "Budget")
-        
-        savedSessions.removeAll()
         sessions.removeAll()
         
         // Get Sessions
-        
-        do {
-            savedSessions = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        for savedSession in savedSessions {
-            let session = SessionModel.init(session: savedSession)
-            sessions.append(session)
-        }
+    
+//        for savedSession in savedSessions {
+//            let session = SessionModel.init(session: savedSession)
+//            sessions.append(session)
+//        }
         
         // Get Budget
         
-        do {
-            savedBudget = try managedContext.fetch(fetchRequestBudget)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+//        do {
+//            savedBudget = try managedContext.fetch(fetchRequestBudget)
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
         
         //        for onlyBudget in savedBudget {
         //
@@ -97,35 +81,35 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         //            budget.append(theOnlyBudget)
         //        }
         
-        if savedBudget.isEmpty == false {
-            var currentBudget = ""
-            var currentSpent = ""
-            var currentSpentCash = ""
-            var currentSpentCredit = ""
-            
-            if let cBudget = savedBudget.first!.value(forKey: "currentBudget") {
-                currentBudget = "\(cBudget)"
-            }
-            
-            if let cSpent = savedBudget.first!.value(forKey: "currentSpent") {
-                currentSpent = "\(cSpent)"
-            }
-            
-            if let cSpentCash = savedBudget.first!.value(forKey: "currentSpentCash") {
-                currentSpentCash = "\(cSpentCash)"
-            }
-            
-            if let cSpentCredit = savedBudget.first!.value(forKey: "currentSpentCredit") {
-                currentSpentCredit = "\(cSpentCredit)"
-            }
-            
-            let budgetDict = ["currentBudget": currentBudget,
-                "currentSpent": currentSpent,
-                "currentSpentCash": currentSpentCash,
-                "currentSpentCredit": currentSpentCredit]
-            
-            budget = BudgetModel.init(curBudget: budgetDict)
-        }
+//        if savedBudget.isEmpty == false {
+//            var currentBudget = ""
+//            var currentSpent = ""
+//            var currentSpentCash = ""
+//            var currentSpentCredit = ""
+//            
+//            if let cBudget = savedBudget.first!.value(forKey: "currentBudget") {
+//                currentBudget = "\(cBudget)"
+//            }
+//            
+//            if let cSpent = savedBudget.first!.value(forKey: "currentSpent") {
+//                currentSpent = "\(cSpent)"
+//            }
+//            
+//            if let cSpentCash = savedBudget.first!.value(forKey: "currentSpentCash") {
+//                currentSpentCash = "\(cSpentCash)"
+//            }
+//            
+//            if let cSpentCredit = savedBudget.first!.value(forKey: "currentSpentCredit") {
+//                currentSpentCredit = "\(cSpentCredit)"
+//            }
+//            
+//            let budgetDict = ["currentBudget": currentBudget,
+//                "currentSpent": currentSpent,
+//                "currentSpentCash": currentSpentCash,
+//                "currentSpentCredit": currentSpentCredit]
+//            
+//            budget = BudgetModel.init(curBudget: budgetDict)
+//        }
         
         setViews()
     }
@@ -135,19 +119,19 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         if budget == nil {
             budgetLabel.text = "Period Budget: $0.00"
         } else {
-            budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(budget!.budget)!))"
+            budgetLabel.text = "Period Budget: \(HelperService.hs.toMoney(rawMoney: Double(budget!.budget)!))"
         }
         
         if sessions.isEmpty {
             spentLabel.text = "Period Spent: $0.00"
         } else {
-            spentLabel.text = "Period Spent: \(DataService.ds.toMoney(rawMoney: Double(DataService.ds.totalSpent(sessions: sessions))!))"
+//            spentLabel.text = "Period Spent: \(HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.totalSpent(sessions: sessions))!))"
         }
         
         if sessions.isEmpty == false {
-            if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
-                handleOverBudget()
-            }
+//            if Double(HelperService.hs.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
+//                handleOverBudget()
+//            }
         }
         
         tableView.reloadData()
@@ -164,21 +148,21 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let session = sessions[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as? HomeTableViewCell {
-            cell.dateLabel.text = "\(session.date)"
-            cell.totalLabel.text = "Total Spent: \(session.total)"
-            cell.cashLabel.text = "Cash: \(session.cash)"
-            cell.creditLabel.text = "Credit: \(session.credit)"
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SessionTVC") as? SessionTableViewCell {
+//            cell.dateLabel.text = "\(session.date)"
+//            cell.totalLabel.text = "Total Spent: \(session.total)"
+//            cell.cashLabel.text = "Cash: \(session.cash)"
+//            cell.creditLabel.text = "Credit: \(session.credit)"
             
             return cell
         }
-        return HomeTableViewCell()
+        return SessionTableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sessionVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionVC") as! ViewController
-        sessionVC.session = sessions[indexPath.row]
-        let navController = UINavigationController(rootViewController: sessionVC)
+        let newSessionVC = self.storyboard?.instantiateViewController(withIdentifier: "NewSessionVC") as! NewSessionViewController
+        newSessionVC.session = sessions[indexPath.row]
+        let navController = UINavigationController(rootViewController: newSessionVC)
         
         self.present(navController, animated: true, completion: nil)
     }
@@ -189,7 +173,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            DataService.ds.deleteSessionLocally(session: savedSessions[indexPath.row])
             sessions.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -198,15 +181,15 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     func reloadSessions() {
         loadData()
         
-        if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
-            overBudgetAlert()
-        }
+//        if Double(DataService.ds.totalSpent(sessions: sessions))! > Double(budget!.budget)! {
+//            overBudgetAlert()
+//        }
     }
     
     @IBAction func addShopSession(_ sender: Any) {
-        let sessionVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionVC") as! ViewController
-        sessionVC.delegate = self
-        let navController = UINavigationController(rootViewController: sessionVC)
+        let newSessionVC = self.storyboard?.instantiateViewController(withIdentifier: "NewSessionVC") as! NewSessionViewController
+        newSessionVC.delegate = self
+        let navController = UINavigationController(rootViewController: newSessionVC)
         
         self.present(navController, animated: true, completion: nil)
     }
@@ -241,13 +224,13 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func addNewBudget(newBudget: String) {
-        DataService.ds.saveBudgetLocally(budget: newBudget) {
-            (result: String) in
-            
-            print(result)
-            self.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(result)!))"
-            self.spentLabel.text = "Period Spent: $0.00"
-        }
+//        DataService.ds.saveBudgetLocally(budget: newBudget) {
+//            (result: String) in
+//            
+//            print(result)
+//            self.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(result)!))"
+//            self.spentLabel.text = "Period Spent: $0.00"
+//        }
     }
     
     // Over budget
@@ -255,7 +238,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     func handleOverBudget() {
         spentLabel.textColor = UIColor.red
         spentLabel.font = UIFont(name: "Avenir-Black", size: 14)
-        spentLabel.text = "Period Spent: \(DataService.ds.toMoney(rawMoney: Double(DataService.ds.totalSpent(sessions: sessions))!))!!"
+//        spentLabel.text = "Period Spent: \(HelperService.hs.toMoney(rawMoney: Double(DataService.ds.totalSpent(sessions: sessions))!))!!"
     }
     
     func overBudgetAlert() {
@@ -299,9 +282,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         newBudgetString += string
         
         if isEditingPeriodBudget {
-            newPeriodAlertController.textFields?[0].text = DataService.ds.toMoney(rawMoney: Double(DataService.ds.moneyDouble(rawString: "\(newBudgetString)", charCount: newBudgetCounter))!)
+            newPeriodAlertController.textFields?[0].text = HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.moneyDouble(rawString: "\(newBudgetString)", charCount: newBudgetCounter))!)
         } else {
-            newUserAlertController.textFields?[0].text = DataService.ds.toMoney(rawMoney: Double(DataService.ds.moneyDouble(rawString: "\(newBudgetString)", charCount: newBudgetCounter))!)
+            newUserAlertController.textFields?[0].text = HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.moneyDouble(rawString: "\(newBudgetString)", charCount: newBudgetCounter))!)
         }
         
         return false

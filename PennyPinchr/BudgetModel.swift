@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import CoreData
 
 class BudgetModel {
     
     private var _budget: String!
     private var _budgetID: String!
+    private var _name: String!
     private var _spent: String!
     private var _spentCash: String!
     private var _spentCredit: String!
@@ -23,6 +23,10 @@ class BudgetModel {
     
     var budgetID: String {
         return _budgetID
+    }
+    
+    var name: String {
+        return _name
     }
     
     var spent: String {
@@ -53,6 +57,16 @@ class BudgetModel {
                 self._budgetID = "\(currentBudgetID)"
             } else {
                 self._budgetID = "0.00"
+            }
+        } else {
+            self._budgetID = "0.00"
+        }
+        
+        if let currentName = budget["name"] {
+            if currentName != "" {
+                self._name = "\(currentName)"
+            } else {
+                self._name = ""
             }
         } else {
             self._budgetID = "0.00"

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
@@ -66,10 +65,10 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
             enterButton.setTitle("Save Budget", for: .normal)
         } else {
             budget = Double((session?.budget)!)!
-            spent = Double((session?.total)!)!
-            remaining = Double((session?.budget)!)! - (Double((session?.cash)!)! + Double((session?.credit)!)!)
-            cash = Double((session?.cash)!)!
-            credit = Double((session?.credit)!)!
+//            spent = Double((session?.total)!)!
+//            remaining = Double((session?.budget)!)! - (Double((session?.cash)!)! + Double((session?.credit)!)!)
+//            cash = Double((session?.cash)!)!
+//            credit = Double((session?.credit)!)!
         }
         
         let keyboardTapDismiss = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
@@ -77,13 +76,13 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func changeViews() {
-        spentLabel.text = DataService.ds.toMoney(rawMoney: spent)
-        
-        if hasCreditCard {
-            remainingLabel.text = "Cash: \(DataService.ds.toMoney(rawMoney: budget)) - Credit: \(DataService.ds.toMoney(rawMoney: spent - budget))"
-        } else {
-            remainingLabel.text = DataService.ds.toMoney(rawMoney: remaining)
-        }
+//        spentLabel.text = DataService.ds.toMoney(rawMoney: spent)
+//        
+//        if hasCreditCard {
+//            remainingLabel.text = "Cash: \(DataService.ds.toMoney(rawMoney: budget)) - Credit: \(DataService.ds.toMoney(rawMoney: spent - budget))"
+//        } else {
+//            remainingLabel.text = DataService.ds.toMoney(rawMoney: remaining)
+//        }
         moneyField.text = ""
     }
     
@@ -96,7 +95,7 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
         tfCounter += 1
         tfString += string
         
-        moneyField.text = DataService.ds.toMoney(rawMoney: Double(DataService.ds.moneyDouble(rawString: "\(tfString)", charCount: tfCounter))!)
+        moneyField.text = HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.moneyDouble(rawString: "\(tfString)", charCount: tfCounter))!)
         
         return false
     }
@@ -110,7 +109,7 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
 
     @IBAction func enterTapped(_ sender: Any) {
         if moneyField.text != "" && budgetSaved == false {
-            budget = DataService.ds.cleanDoubleMoney(dirtyString: moneyField.text!)
+            budget = HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!)
             remaining = budget
             
             budgetSaved = true
@@ -121,7 +120,7 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
             changeViews()
             showMoneyLabels()
         } else if moneyField.text != "" && budgetSaved == true {
-            lastItem = DataService.ds.priceWithTax(rawPrice: DataService.ds.cleanDoubleMoney(dirtyString: moneyField.text!), tax: tax)
+            lastItem = HelperService.hs.priceWithTax(rawPrice: HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!), tax: tax)
             spent += lastItem
             remaining = budget - spent
             
@@ -208,15 +207,15 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
         } else if component == 3 {
             return "%"
         }
-        return "\(DataService.ds.taxArray()[row])"
+        return "\(HelperService.hs.taxArray()[row])"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if component == 0 {
-            taxL = DataService.ds.taxArray()[row]
+            taxL = HelperService.hs.taxArray()[row]
         } else if component == 2 {
-            taxR = DataService.ds.taxArray()[row]
+            taxR = HelperService.hs.taxArray()[row]
         }
         
         tax = Double("\(taxL).\(taxR)")!
@@ -245,13 +244,13 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     // Save
     
     @IBAction func saveTapped(_ sender: Any) {
-        DataService.ds.saveSessionLocally(budget: budget, credit: credit, spent: spent, cash: cash) {
-            (result: String) in
-            
-            print(result)
-            
-            self.closeSession()
-        }
+//        DataService.ds.saveSessionLocally(budget: budget, credit: credit, spent: spent, cash: cash) {
+//            (result: String) in
+//            
+//            print(result)
+//            
+//            self.closeSession()
+//        }
     }
     
     func closeSession() {

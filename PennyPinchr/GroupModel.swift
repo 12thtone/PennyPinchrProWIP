@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 class GroupModel {
     
@@ -17,6 +16,7 @@ class GroupModel {
     private var _spent: String!
     private var _spentCash: String!
     private var _spentCredit: String!
+    private var _memberBudgets: [[String: String]]!
     
     var groupName: String {
         return _groupName
@@ -42,30 +42,46 @@ class GroupModel {
         return _spentCredit
     }
     
-    init(session: NSManagedObject) {
+    var memberBudgets: [[String: String]] {
+        return _memberBudgets
+    }
+    
+    init(group: [String: AnyObject]) {
         
-        if let indGroupName = session.value(forKey: "groupName") {
-            self._groupName = "\(indGroupName)"
+        if group["name"] != nil {
+            self._groupName = "\(group["name"]!)"
+        } else {
+            self._groupName = ""
         }
         
-        if let indGroupID = session.value(forKey: "groupID") {
-            self._groupID = "\(indGroupID)"
+        if group["budget"] != nil {
+            self._budget = "\(group["budget"]!)"
+        } else {
+            self._budget = ""
         }
         
-        if let indBudget = session.value(forKey: "budget") {
-            self._budget = "\(indBudget)"
+        if group["spent"] != nil {
+            self._spent = "\(group["spent"]!)"
+        } else {
+            self._spent = ""
         }
         
-        if let indSpent = session.value(forKey: "spent") {
-            self._spent = "\(indSpent)"
+        if group["spentCash"] != nil {
+            self._spentCash = "\(group["spentCash"]!)"
+        } else {
+            self._spentCash = ""
         }
         
-        if let indSpentCash = session.value(forKey: "spentCash") {
-            self._spentCash = "\(indSpentCash)"
+        if group["spentCredit"] != nil {
+            self._spentCredit = "\(group["spentCredit"]!)"
+        } else {
+            self._spentCredit = ""
         }
         
-        if let indSpentCredit = session.value(forKey: "spentCredit") {
-            self._spentCredit = "\(indSpentCredit)"
+        if group["groupName"] != nil {
+            self._spentCredit = "\(group["name"]!)"
+        } else {
+            self._groupName = ""
         }
     }
 }
