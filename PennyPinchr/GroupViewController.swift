@@ -54,7 +54,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             print(result)
             
-            self.budget = BudgetModel(curBudget: result)
+            self.budget = BudgetModel(budget: result)
             
             var totalSpent = 0.0
             var userBudget = 0.0
