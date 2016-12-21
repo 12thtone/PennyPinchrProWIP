@@ -40,7 +40,7 @@ class BudgetModel {
             _spent = 0.00
         }
         
-        if budget["budget"] != nil {
+        if budget["budget"] != nil && _budget! != 0.0 {
             
             _percentOfBudget = Int((_spent! / _budget!) * 100)
         } else {

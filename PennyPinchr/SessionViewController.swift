@@ -63,18 +63,22 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.setViews()
                     }
                 }
+            } else {
+                self.tableView.reloadData()
+                self.setViews()
             }
         }
     }
     
     func setViews() {
         
-        budgetLabel.text = "Period Budget: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.budget)!))"
+        groupLabel.text = sessionDetails!.name
+        budgetLabel.text = "Budget: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.budget)!))"
         
         if sessionDetails == nil {
-            spentLabel.text = "Period Spent: $0.00"
+            spentLabel.text = "Cash Spent: $0.00 & Credit Spent: $0.00"
         } else {
-            spentLabel.text = "Period Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spent)!))"
+            spentLabel.text = "Cash Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spentCash)!)) & Credit Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spentCredit)!))"
         }
         
         if sessions.isEmpty == false {
@@ -137,7 +141,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    @IBAction func addShopSession(_ sender: Any) {
+    @IBAction func newSessionTapped(_ sender: Any) {
+        
         let newSessionVC = self.storyboard?.instantiateViewController(withIdentifier: "NewSessionVC") as! NewSessionViewController
         newSessionVC.sessionCashSpent = sessionDetails!.spentCash
         newSessionVC.sessionCreditSpent = sessionDetails!.spentCredit

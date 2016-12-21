@@ -59,7 +59,8 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func setupViews() {
-        if session != nil {
+        
+        if session == nil {
             spentLabel.isHidden = true
             remainingLabel.isHidden = true
             
@@ -246,7 +247,8 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     // Save
     
     @IBAction func saveTapped(_ sender: Any) {
-        DataService.ds.saveNewSession(spentCashMaster: sessionCashSpent, spentCreditMaster: sessionCreditSpent, budget: "\(budget)", spent: "\(spent)", spentCash: "\(cash)", spentCredit: "\(credit))") {
+        
+        DataService.ds.saveNewSession(spentCashMaster: sessionCashSpent, spentCreditMaster: sessionCreditSpent, budget: "\(budget)", spent: "\(spent)", spentCash: HelperService.hs.calculatedCash(spentAmt: spent, budgetAmt: budget), spentCredit: HelperService.hs.calculatedCredit(spentAmt: spent, budgetAmt: budget)) {
             
             (result: String) in
             

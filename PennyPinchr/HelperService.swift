@@ -34,6 +34,13 @@ class HelperService {
         return ""
     }
     
+//    var prefPersonalBudget: String {
+//        if defaults.string(forKey: "prefPersonalBudget") != nil {
+//            return defaults.string(forKey: "prefPersonalBudget")!
+//        }
+//        return ""
+//    }
+    
     var prefGroupSessions: String {
         if defaults.string(forKey: "prefGroupSessions") != nil {
             return defaults.string(forKey: "prefGroupSessions")!
@@ -121,5 +128,19 @@ class HelperService {
     
     func settingsArray() -> [String] {
         return ["Switch Budgets", "Add Budget", "Info", "Logout"]
+    }
+    
+    func calculatedCash(spentAmt: Double, budgetAmt: Double) -> String {
+        if spentAmt < budgetAmt {
+            return "\(spentAmt)"
+        }
+        return "\(budgetAmt)"
+    }
+    
+    func calculatedCredit(spentAmt: Double, budgetAmt: Double) -> String {
+        if spentAmt < budgetAmt {
+            return "0.00"
+        }
+        return String(format: "%.2f", (spentAmt - budgetAmt))
     }
 }

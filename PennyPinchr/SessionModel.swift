@@ -15,7 +15,7 @@ class SessionModel {
     private var _spentCash: String!
     private var _spentCredit: String!
     private var _budget: String!
-    private var _budgetID: String!
+    private var _name: String!
     
     var date: String {
         return _date
@@ -37,8 +37,8 @@ class SessionModel {
         return _budget
     }
     
-    var budgetID: String {
-        return _budgetID
+    var name: String {
+        return _name
     }
     
     init(session: [String: AnyObject]) {
@@ -52,31 +52,31 @@ class SessionModel {
         if session["spent"] != nil {
             self._spent = "\(session["spent"]!)"
         } else {
-            self._spent = ""
+            self._spent = "0.00"
         }
         
         if session["spentCash"] != nil {
             self._spentCash = "\(session["spentCash"]!)"
         } else {
-            self._spentCash = ""
+            self._spentCash = "0.00"
         }
         
         if session["spentCredit"] != nil {
             self._spentCredit = "\(session["spentCredit"]!)"
         } else {
-            self._spentCredit = ""
+            self._spentCredit = "0.00"
         }
         
         if session["budget"] != nil {
             self._budget = "\(session["budget"]!)"
         } else {
-            self._budget = ""
+            self._budget = "0.00"
         }
         
-        if session["budgetID"] != nil {
-            self._budgetID = "\(session["budgetID"]!)"
+        if session["name"] != nil {
+            self._name = "\(session["name"]!)"
         } else {
-            self._budgetID = ""
+            self._name = ""
         }
     }
 }

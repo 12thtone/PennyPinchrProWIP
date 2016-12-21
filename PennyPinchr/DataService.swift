@@ -209,7 +209,7 @@ class DataService {
                         if k == HelperService.hs.userID {
                             self.defaults.set("\(valueDict["sessionsID"]!)", forKey: "prefSessionsID")
                         }
-                        
+                                                
                         if (returnedDict["memberBudgets"] as! [String: AnyObject]).count == memberArray.count {
                             completion(groupDict)
                         }
@@ -322,7 +322,7 @@ class DataService {
                 
                 var sessionsArray = [[String: AnyObject]]()
                 
-                for (k, v) in returnedDict["individualSessions"] as! [String: AnyObject] {
+                for (_, v) in returnedDict["individualSessions"] as! [String: AnyObject] {
                     let valueDict = v as! [String: String]
                     
                     let individualSessionsDict = ["budget": "\(valueDict["budget"]!)" as AnyObject,
@@ -331,13 +331,16 @@ class DataService {
                                       "spentCredit": "\(valueDict["spentCredit"]!)" as AnyObject,
                                       "date": "\(valueDict["date"]!)" as AnyObject]
                     
-                    sessionsArray.append([k: individualSessionsDict as AnyObject])
+                    sessionsArray.append(individualSessionsDict)
+//                    sessionsArray.append([k: individualSessionsDict as AnyObject])
                     sessionsDict["individualSessions"] = sessionsArray as AnyObject?
                     
                     if (returnedDict["individualSessions"] as! [String: AnyObject]).count == sessionsArray.count {
                         completion(sessionsDict)
                     }
                 }
+            } else {
+                completion(sessionsDict)
             }
         })
     }
@@ -350,16 +353,102 @@ class DataService {
                            "spentCash": spentCash,
                            "spentCredit": spentCredit]
         
-        let sessionDict = ["spentCash": spentCashMaster as AnyObject,
-                           "spentCredit": spentCreditMaster as AnyObject,
-                           "individualSessions": individualDict as AnyObject] as [String : AnyObject]
+        let sessionDict = ["spentCash": String(format: "%.2f", (Double(spentCashMaster)!) + (Double(spentCash)!)),
+                           "spentCredit": String(format: "%.2f", (Double(spentCreditMaster)!) + (Double(spentCredit)!))]
+//                           "individualSessions": individualDict as AnyObject] as [String : AnyObject]
         
         FB_DATABASE_REF.child("sessions").child(HelperService.hs.prefGroupSessions).updateChildValues(sessionDict) { (error, ref) -> Void in
+            
             if error == nil {
-                completion("done")
+                FB_DATABASE_REF.child("sessions").child(HelperService.hs.prefGroupSessions).child("individualSessions").childByAutoId().updateChildValues(individualDict) { (error, ref) -> Void in
+                    
+                    if error == nil {
+                        self.updateBudgetSession(spent: spent, spentCash: spentCash, spentCredit: spentCredit)
+                        completion("done")
+                    } else {
+                        print("\(error.debugDescription)")
+                        completion("error")
+                    }
+                }
             } else {
                 print("\(error.debugDescription)")
                 completion("error")
+            }
+        }
+    }
+    
+    func updateBudgetSession(spent: String, spentCash: String, spentCredit: String) {
+        
+        // Group data transaction
+        
+        FB_DATABASE_REF.child("groups").child(HelperService.hs.prefGroup).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            
+            if var budgetData = currentData.value as? [String : AnyObject] {
+//                budgetData["spent"]!    String(format: "%.2f", (spentAmt - budgetAmt))
+                
+                if budgetData["spent"] != nil {
+                    
+                    var spentSaved = budgetData["spent"] as? String
+                    spentSaved = String(format: "%.2f", (Double(spentSaved!)!) + (Double(spent)!))
+                    budgetData["spent"] = spentSaved as AnyObject?
+                }
+                
+                if budgetData["spentCash"] != nil {
+                    var cashSaved = budgetData["spentCash"] as? String
+                    cashSaved = String(format: "%.2f", (Double(cashSaved!)!) + (Double(spentCash)!))
+                    budgetData["spentCash"] = cashSaved as AnyObject?
+                }
+                
+                if budgetData["spentCredit"] != nil {
+                    var creditSaved = budgetData["spentCredit"] as? String
+                    creditSaved = String(format: "%.2f", (Double(creditSaved!)!) + (Double(spentCredit)!))
+                    budgetData["spentCredit"] = creditSaved as AnyObject?
+                }
+            
+                currentData.value = budgetData
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        // Member data transaction
+        
+        FB_DATABASE_REF.child("groups").child(HelperService.hs.prefGroup).child("memberBudgets").child(HelperService.hs.userID).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            
+            if var budgetData = currentData.value as? [String : AnyObject] {
+                //                budgetData["spent"]!    String(format: "%.2f", (spentAmt - budgetAmt))
+                
+                if budgetData["spent"] != nil {
+                    var spentSaved = budgetData["spent"] as? String
+                    spentSaved = String(format: "%.2f", (Double(spentSaved!)!) + (Double(spent)!))
+                    budgetData["spent"] = spentSaved as AnyObject?
+                }
+                
+                if budgetData["spentCash"] != nil {
+                    var cashSaved = budgetData["spentCash"] as? String
+                    cashSaved = String(format: "%.2f", (Double(cashSaved!)!) + (Double(spentCash)!))
+                    budgetData["spentCash"] = cashSaved as AnyObject?
+                }
+                
+                if budgetData["spentCredit"] != nil {
+                    var creditSaved = budgetData["spentCredit"] as? String
+                    creditSaved = String(format: "%.2f", (Double(creditSaved!)!) + (Double(spentCredit)!))
+                    budgetData["spentCredit"] = creditSaved as AnyObject?
+                }
+                
+                currentData.value = budgetData
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
             }
         }
     }

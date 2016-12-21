@@ -195,7 +195,7 @@
 				03979CEA1DFC639300855574 /* Views */,
 				035FB49A1E0376F8006BF437 /* Profile */,
 				035FB4931E037696006BF437 /* Settings */,
-				03979CEB1DFC63AD00855574 /* Home */,
+				03979CEB1DFC63AD00855574 /* Sessions */,
 				03979CEC1DFC63B800855574 /* ShoppingSession */,
 				037C3D941E022C7F001AAFEE /* Group */,
 				03979CED1DFC640A00855574 /* Model */,
@@ -241,13 +241,13 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		03979CEB1DFC63AD00855574 /* Home */ = {
+		03979CEB1DFC63AD00855574 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
 				03979CE81DFC5E3100855574 /* SessionViewController.swift */,
 				03979CEF1DFC64C800855574 /* SessionTableViewCell.swift */,
 			);
-			name = Home;
+			name = Sessions;
 			sourceTree = "<group>";
 		};
 		03979CEC1DFC63B800855574 /* ShoppingSession */ = {
