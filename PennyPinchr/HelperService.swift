@@ -137,6 +137,10 @@ class HelperService {
         return ["Switch Budgets", "Add Budget", "Info", "Logout"]
     }
     
+    func settingsImageArray() -> [String] {
+        return ["switch_groups_mod", "new_group_mod", "info_mod", "logout_mod"]
+    }
+    
     func calculatedCash(spentAmt: Double, budgetAmt: Double) -> String {
         if spentAmt < budgetAmt {
             return "\(spentAmt)"
@@ -149,5 +153,30 @@ class HelperService {
             return "0.00"
         }
         return String(format: "%.2f", (spentAmt - budgetAmt))
+    }
+    
+    func sortedArrayByDate(arrayToSort: [[String: AnyObject]]) -> [[String: AnyObject]] {
+        let arrangedArray = arrayToSort.sorted(by: compareDates)
+        
+        return arrangedArray
+    }
+    
+    func compareDates(d1:[String: AnyObject], d2:[String: AnyObject]) -> Bool {
+        var date1 = d1["date"]
+        var date2 = d2["date"]
+        
+        if date1 == nil {
+            date1 = d1["postDate"]
+            date2 = d2["postDate"]
+        }
+        
+        return dateFromString(dateString: "\(date1!)") > dateFromString(dateString: "\(date2!)")
+    }
+    
+    func dateFromString(dateString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        return dateFormatter.date(from: dateString)!
     }
 }

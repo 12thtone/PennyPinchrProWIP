@@ -11,6 +11,7 @@ import UIKit
 class SettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var settingActionLabel: UILabel!
+    @IBOutlet weak var settingsImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

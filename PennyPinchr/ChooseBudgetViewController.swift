@@ -13,6 +13,8 @@ class ChooseBudgetViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var groups = [GroupModel]()
+    
+    var selectedGroupID = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,7 @@ class ChooseBudgetViewController: UIViewController, UITableViewDelegate, UITable
             
             if group.groupID == HelperService.hs.prefGroup {
                 cell.selectedImageView.isHidden = false
+                selectedGroupID = group.groupID
             } else {
                 cell.selectedImageView.isHidden = true
             }
@@ -68,5 +71,24 @@ class ChooseBudgetViewController: UIViewController, UITableViewDelegate, UITable
             return cell
         }
         return SettingsTableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedGroupID = groups[indexPath.row].groupID
+        DataService.ds.updatePrefGroupUI(groupID: selectedGroupID)
+        
+        tableView.reloadData()
+    }
+    
+    @IBAction func saveTapped(_ sender: Any) {
+        DataService.ds.updatePrefGroup(groupID: selectedGroupID) {
+            (result: String) in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func doneTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

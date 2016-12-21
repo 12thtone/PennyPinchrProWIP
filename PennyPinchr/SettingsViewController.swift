@@ -34,7 +34,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTVC") as? SettingsTableViewCell {
+            
             cell.settingActionLabel.text = HelperService.hs.settingsArray()[indexPath.row]
+            cell.settingsImageView.image = UIImage(named: HelperService.hs.settingsImageArray()[indexPath.row])
             
             return cell
         }
@@ -56,9 +58,43 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             self.present(navController, animated: true, completion: nil)
         } else if indexPath.row == 2  {
+            let infoVC = self.storyboard?.instantiateViewController(withIdentifier: "InfoVC") as! InfoViewController
+            let navController = UINavigationController(rootViewController: infoVC)
             
+            self.present(navController, animated: true, completion: nil)
         } else {
+            confirmLogout()
+        }
+    }
+    
+    func confirmLogout() {
+        let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout of PennyPinchr?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            self.completeLogout()
+        }
+        alertController.addAction(okAction)
+        
+        let noAction = UIAlertAction(title: "No Chance", style: .default) { (action) in
             
         }
+        alertController.addAction(noAction)
+        
+        self.present(alertController, animated: true) {
+            
+        }
+    }
+    
+    func completeLogout() {
+        DataService.ds.logout()
+        
+        let pennyStorage = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: pennyStorage)
+        
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
+        
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 }

@@ -26,10 +26,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         
         loadingIndicator.isHidden = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         
         if HelperService.hs.isLogedIn() {
             tableView.isHidden = true
@@ -39,7 +35,13 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             loadingIndicator.startAnimating()
             
             loadGroupUsers()
-        } else {
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if HelperService.hs.isLogedIn() == false {
             let authVC = self.storyboard?.instantiateViewController(withIdentifier: "AuthVC") as! AuthViewController
             let navController = UINavigationController(rootViewController: authVC)
             

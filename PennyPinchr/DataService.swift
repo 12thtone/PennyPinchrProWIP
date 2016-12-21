@@ -86,6 +86,23 @@ class DataService {
         }
     }
     
+    func updatePrefGroupUI(groupID: String) {
+        defaults.set(groupID, forKey: "prefGroup")
+    }
+    
+    func updatePrefGroup(groupID: String, completion:@escaping (_ result: String) -> Void) {
+        FB_DATABASE_REF.child("users").child(HelperService.hs.userID).updateChildValues(["prefGroup": groupID]) { (error, ref) -> Void in
+            if error == nil {
+                self.defaults.set(groupID, forKey: "prefGroup")
+                
+                completion("done")
+            } else {
+                print("\(error.debugDescription)")
+                completion("error")
+            }
+        }
+    }
+    
     func updateGroupBudget(group: String, budget: String, completion:@escaping (_ result: String) -> Void) {
         
         // Update existing budget in Group's budget
@@ -375,13 +392,15 @@ class DataService {
                                       "date": "\(valueDict["date"]!)" as AnyObject]
                     
                     sessionsArray.append(individualSessionsDict)
-//                    sessionsArray.append([k: individualSessionsDict as AnyObject])
-                    sessionsDict["individualSessions"] = sessionsArray as AnyObject?
+
+//                    sessionsDict["individualSessions"] = sessionsArray as AnyObject?
                     
                     if (returnedDict["individualSessions"] as! [String: AnyObject]).count == sessionsArray.count {
                         
                         let remainingBudget = Double("\(valueDict["budget"]!)")! - Double("\(valueDict["spentCash"]!)")!
                         self.defaults.set("\(String(format: "%.2f", remainingBudget))", forKey: "prefPersonalBudgetRemaining")
+                        
+                        sessionsDict["individualSessions"] = HelperService.hs.sortedArrayByDate(arrayToSort: sessionsArray) as AnyObject?
                         
                         completion(sessionsDict)
                     }
