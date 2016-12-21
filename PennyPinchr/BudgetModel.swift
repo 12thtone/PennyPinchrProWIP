@@ -10,96 +10,41 @@ import Foundation
 
 class BudgetModel {
     
-    private var _budget: String!
-    private var _budgetID: String!
-    private var _name: String!
-    private var _spent: String!
-    private var _spentCash: String!
-    private var _spentCredit: String!
+    private var _budget: Double!
+    private var _spent: Double!
+    private var _percentOfBudget: Int!
     
-    var budget: String {
+    var budget: Double {
         return _budget
     }
     
-    var budgetID: String {
-        return _budgetID
-    }
-    
-    var name: String {
-        return _name
-    }
-    
-    var spent: String {
+    var spent: Double {
         return _spent
     }
     
-    var spentCash: String {
-        return _spentCash
+    var percentOfBudget: Int {
+        return _percentOfBudget
     }
     
-    var spentCredit: String {
-        return _spentCredit
-    }
-    
-    init(budget: [String: String]) {
-        if let currentBudget = budget["budget"] {
-            if currentBudget != "" {
-                self._budget = "\(currentBudget)"
-            } else {
-                self._budget = "0.00"
-            }
+    init(budget: [String: AnyObject]) {
+        
+        if budget["budget"] != nil {
+            _budget = Double("\(budget["budget"]!)")!
         } else {
-            self._budget = "0.00"
+            _budget = 0.00
         }
         
-        if let currentBudgetID = budget["budgetID"] {
-            if currentBudgetID != "" {
-                self._budgetID = "\(currentBudgetID)"
-            } else {
-                self._budgetID = "0.00"
-            }
+        if budget["spent"] != nil {
+            _spent = Double("\(budget["spent"]!)")!
         } else {
-            self._budgetID = "0.00"
+            _spent = 0.00
         }
         
-        if let currentName = budget["name"] {
-            if currentName != "" {
-                self._name = "\(currentName)"
-            } else {
-                self._name = ""
-            }
+        if budget["budget"] != nil {
+            
+            _percentOfBudget = Int((_spent! / _budget!) * 100)
         } else {
-            self._budgetID = "0.00"
-        }
-        
-        if let currentSpent = budget["spent"] {
-            if currentSpent != "" {
-                self._spent = "\(currentSpent)"
-            } else {
-                self._spent = "0.00"
-            }
-        } else {
-            self._spent = "0.00"
-        }
-        
-        if let currentSpentCash = budget["spentCash"] {
-            if currentSpentCash != "" {
-                self._spentCash = "\(currentSpentCash)"
-            } else {
-                self._spentCash = "0.00"
-            }
-        } else {
-            self._spentCash = "0.00"
-        }
-        
-        if let currentSpentCredit = budget["spentCredit"] {
-            if currentSpentCredit != "" {
-                self._spentCredit = "\(currentSpentCredit)"
-            } else {
-                self._spentCredit = "0.00"
-            }
-        } else {
-            self._spentCredit = "0.00"
+            _percentOfBudget = 0
         }
     }
 }
