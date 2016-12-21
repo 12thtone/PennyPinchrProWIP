@@ -22,6 +22,10 @@
 		037C3D961E022CB0001AAFEE /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D951E022CB0001AAFEE /* GroupViewController.swift */; };
 		037C3D981E022CC2001AAFEE /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D971E022CC2001AAFEE /* GroupTableViewCell.swift */; };
 		03916FDD1E09A41D002A2E4F /* GroupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FDC1E09A41D002A2E4F /* GroupMemberModel.swift */; };
+		03916FDF1E09F379002A2E4F /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FDE1E09F379002A2E4F /* InviteViewController.swift */; };
+		03916FE11E09F72D002A2E4F /* ChooseBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE01E09F72D002A2E4F /* ChooseBudgetViewController.swift */; };
+		03916FE31E09F745002A2E4F /* ChooseBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE21E09F745002A2E4F /* ChooseBudgetTableViewCell.swift */; };
+		03916FE51E0A08BF002A2E4F /* IndividualSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE41E0A08BF002A2E4F /* IndividualSessionModel.swift */; };
 		03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB61DFB1AA100855574 /* AppDelegate.swift */; };
 		03979CB91DFB1AA100855574 /* NewSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB81DFB1AA100855574 /* NewSessionViewController.swift */; };
 		03979CBC1DFB1AA100855574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03979CBA1DFB1AA100855574 /* Main.storyboard */; };
@@ -74,6 +78,10 @@
 		037C3D951E022CB0001AAFEE /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		037C3D971E022CC2001AAFEE /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		03916FDC1E09A41D002A2E4F /* GroupMemberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberModel.swift; sourceTree = "<group>"; };
+		03916FDE1E09F379002A2E4F /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
+		03916FE01E09F72D002A2E4F /* ChooseBudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseBudgetViewController.swift; sourceTree = "<group>"; };
+		03916FE21E09F745002A2E4F /* ChooseBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseBudgetTableViewCell.swift; sourceTree = "<group>"; };
+		03916FE41E0A08BF002A2E4F /* IndividualSessionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualSessionModel.swift; sourceTree = "<group>"; };
 		03979CB31DFB1AA100855574 /* PennyPinchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyPinchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03979CB61DFB1AA100855574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03979CB81DFB1AA100855574 /* NewSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +138,9 @@
 		035FB4931E037696006BF437 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				03916FE01E09F72D002A2E4F /* ChooseBudgetViewController.swift */,
+				03916FE21E09F745002A2E4F /* ChooseBudgetTableViewCell.swift */,
+				035FB4981E0376F0006BF437 /* CreateGroupViewController.swift */,
 				035FB4961E0376C2006BF437 /* SettingsViewController.swift */,
 				035FB4941E0376AB006BF437 /* SettingsTableViewCell.swift */,
 			);
@@ -140,9 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				03B15DBB1E074BE4000797D5 /* AuthViewController.swift */,
-				035FB4981E0376F0006BF437 /* CreateGroupViewController.swift */,
 				035FB49B1E03771C006BF437 /* ProfileViewController.swift */,
 				035FB49D1E037731006BF437 /* ProfileTableViewCell.swift */,
+				03916FDE1E09F379002A2E4F /* InviteViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -251,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				03CD1DAD1DFDC67C00CFECC8 /* SessionModel.swift */,
+				03916FE41E0A08BF002A2E4F /* IndividualSessionModel.swift */,
 				03D5C7021DFEF4A600E4484E /* BudgetModel.swift */,
 				035FB4A11E037DEA006BF437 /* UserModel.swift */,
 				03B15DB71E072066000797D5 /* GroupModel.swift */,
@@ -487,8 +499,10 @@
 				035FB4971E0376C2006BF437 /* SettingsViewController.swift in Sources */,
 				035C29911E041C8600CD530F /* Constants.swift in Sources */,
 				035FB49E1E037731006BF437 /* ProfileTableViewCell.swift in Sources */,
+				03916FE31E09F745002A2E4F /* ChooseBudgetTableViewCell.swift in Sources */,
 				035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */,
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
+				03916FDF1E09F379002A2E4F /* InviteViewController.swift in Sources */,
 				03B15DB81E072066000797D5 /* GroupModel.swift in Sources */,
 				03B15DBC1E074BE4000797D5 /* AuthViewController.swift in Sources */,
 				03916FDD1E09A41D002A2E4F /* GroupMemberModel.swift in Sources */,
@@ -496,6 +510,8 @@
 				035655171E04BE4600472751 /* ImageViewRound.swift in Sources */,
 				03979CE71DFC4A6800855574 /* ButtonBlackBorderRadius.swift in Sources */,
 				03B15DBA1E072DD1000797D5 /* HelperService.swift in Sources */,
+				03916FE11E09F72D002A2E4F /* ChooseBudgetViewController.swift in Sources */,
+				03916FE51E0A08BF002A2E4F /* IndividualSessionModel.swift in Sources */,
 				037C3D961E022CB0001AAFEE /* GroupViewController.swift in Sources */,
 				035FB4A21E037DEA006BF437 /* UserModel.swift in Sources */,
 				03CD1DAA1DFDBBAA00CFECC8 /* DataService.swift in Sources */,

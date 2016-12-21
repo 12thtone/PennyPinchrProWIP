@@ -46,25 +46,25 @@ class GroupMemberModel {
         if member["budget"] != nil {
             self._budget = "\(member["budget"]!)"
         } else {
-            self._budget = ""
+            self._budget = "0.00"
         }
         
         if member["spent"] != nil {
             self._spent = "\(member["spent"]!)"
         } else {
-            self._spent = ""
+            self._spent = "0.00"
         }
         
         if member["spentCash"] != nil {
             self._spentCash = "\(member["spentCash"]!)"
         } else {
-            self._spentCash = ""
+            self._spentCash = "0.00"
         }
         
         if member["spentCredit"] != nil {
             self._spentCredit = "\(member["spentCredit"]!)"
         } else {
-            self._spentCredit = ""
+            self._spentCredit = "0.00"
         }
         
         if member["name"] != nil {
@@ -73,8 +73,8 @@ class GroupMemberModel {
             self._name = ""
         }
         
-        if member["memberImage"] != nil {
-            self._memberImage = member["memberImage"] as! UIImage
+        if member["userImage"] != nil {
+            self._memberImage = member["userImage"] as! UIImage
         } else {
             self._memberImage = UIImage(named: "no_img")
         }

@@ -12,6 +12,7 @@ class CreateGroupViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var tapLabel: UILabel!
     
     var isFromAuth = false
     

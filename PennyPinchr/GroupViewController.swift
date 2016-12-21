@@ -16,7 +16,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var reportsButton: UIButton!
     
-    var users = [UserModel]()
+    var users = [GroupMemberModel]()
     var budget: BudgetModel?
 
     override func viewDidLoad() {
@@ -49,52 +49,41 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadGroupUsers() {
-//        DataService.ds.getAccountData() {
-//            (result: [String: String]) in
-//            
-//            print(result)
-//            
-//            self.budget = BudgetModel(budget: result)
-//            
-//            var totalSpent = 0.0
-//            var userBudget = 0.0
-//            
-//            if let tSpent = self.budget?.spent {
-//                totalSpent = Double("\(tSpent)")!
-//            }
-//            
-//            if let uBudget = self.budget?.budget {
-//                userBudget = Double("\(uBudget)")!
-//            }
-//            
-//            let percent = Int(totalSpent / userBudget)
-//            
-//            self.percentSpentLabel.text = "\(percent)% of Budget Spent"
-//            
-//            if result["groupUsers"]! != "" {
-//                UserService.us.getUserData(userString: result["groupUsers"]!) {
-//                    (resultUsers: [[String: AnyObject]]) in
-//                    
-//                    print(resultUsers)
-//                    
-//                    for eachUser in resultUsers {
-//                        let modelUser = UserModel.init(user: eachUser)
-//                        self.users.append(modelUser)
-//                    }
-//                    
-//                    self.tableView.reloadData()
-//                    
-//                    self.hideShowViews(toHide: false)
-//                    
-//                    self.loadingIndicator.isHidden = true
-//                    self.loadingIndicator.stopAnimating()
-//                    
-//                }
-//            } else {
-//                self.loadingIndicator.isHidden = true
-//                self.loadingIndicator.stopAnimating()
-//            }
-//        }
+        DataService.ds.getGroupData(group: HelperService.hs.prefGroup) {
+            (result: [String: AnyObject]) in
+            
+            print(result)
+            
+            self.budget = BudgetModel(budget: result)
+            
+            if let members = result["memberBudgets"] as? [[String: AnyObject]] {
+                
+                for member in members {
+                    
+                    let memberUser = GroupMemberModel.init(member: member.values.first as! [String : AnyObject])
+                    
+                    self.users.append(memberUser)
+                    
+                    if members.count == self.users.count {
+                        self.tableView.reloadData()
+                        self.setViews()
+                    }
+                }
+            } else {
+                self.loadingIndicator.isHidden = true
+                self.loadingIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    func setViews() {
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
+        
+        percentSpentLabel.text = "\(budget!.percentOfBudget)% of Budget Spent"
+        
+        tableView.isHidden = false
+        percentSpentLabel.isHidden = false
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,18 +100,18 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             var budgetStatusImage: UIImage?
             
-//            if Double(aUser.periodBudget)! < Double(aUser.periodCashSpent)! + Double(aUser.periodCreditSpent)! {
-//                budgetStatusImage = UIImage(named: "caution")
-//            } else {
-//                budgetStatusImage = UIImage(named: "logo")
-//            }
-//            
-//            cell.userImageView.image = aUser.userImage
-//            cell.budgetStatusImageView.image = budgetStatusImage
-//            cell.nameLabel.text = "\(aUser.name)"
-//            cell.budgetLabel.text = "Period Budget: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodBudget)!))"
-//            cell.cashLabel.text = "Cash Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCashSpent)!))"
-//            cell.creditLabel.text = "Credit Spent: \(DataService.ds.toMoney(rawMoney: Double(aUser.periodCreditSpent)!))"
+            if Double(aUser.budget)! < Double(aUser.spentCash)! {
+                budgetStatusImage = UIImage(named: "caution")
+            } else {
+                budgetStatusImage = UIImage(named: "logo")
+            }
+            
+            cell.userImageView.image = aUser.memberImage
+            cell.budgetStatusImageView.image = budgetStatusImage
+            cell.nameLabel.text = "\(aUser.name)"
+            cell.budgetLabel.text = "Period Budget: \(HelperService.hs.toMoney(rawMoney: Double(aUser.budget)!))"
+            cell.cashLabel.text = "Cash Spent: \(HelperService.hs.toMoney(rawMoney: Double(aUser.spentCash)!))"
+            cell.creditLabel.text = "Credit Spent: \(HelperService.hs.toMoney(rawMoney: Double(aUser.spentCredit)!))"
             
             return cell
         }
@@ -131,7 +120,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-        profileVC.user = users[indexPath.row]
+//        profileVC.user = users[indexPath.row]
         let navController = UINavigationController(rootViewController: profileVC)
         
         self.present(navController, animated: true, completion: nil)

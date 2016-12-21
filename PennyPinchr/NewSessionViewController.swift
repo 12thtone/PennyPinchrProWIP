@@ -19,7 +19,9 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var delegate: SessionDelegate?
     
-    var session: SessionModel?
+    var session: IndividualSessionModel?
+    var sessionCashSpent = ""
+    var sessionCreditSpent = ""
     
     var budget = 0.0
     var spent = 0.0
@@ -65,10 +67,10 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
             enterButton.setTitle("Save Budget", for: .normal)
         } else {
             budget = Double((session?.budget)!)!
-//            spent = Double((session?.total)!)!
-//            remaining = Double((session?.budget)!)! - (Double((session?.cash)!)! + Double((session?.credit)!)!)
-//            cash = Double((session?.cash)!)!
-//            credit = Double((session?.credit)!)!
+            spent = Double((session?.spent)!)!
+            remaining = Double((session?.budget)!)! - (Double((session?.spentCash)!)! + Double((session?.spentCredit)!)!)
+            cash = Double((session?.spentCash)!)!
+            credit = Double((session?.spentCredit)!)!
         }
         
         let keyboardTapDismiss = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
@@ -76,13 +78,13 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func changeViews() {
-//        spentLabel.text = DataService.ds.toMoney(rawMoney: spent)
-//        
-//        if hasCreditCard {
-//            remainingLabel.text = "Cash: \(DataService.ds.toMoney(rawMoney: budget)) - Credit: \(DataService.ds.toMoney(rawMoney: spent - budget))"
-//        } else {
-//            remainingLabel.text = DataService.ds.toMoney(rawMoney: remaining)
-//        }
+        spentLabel.text = HelperService.hs.toMoney(rawMoney: spent)
+        
+        if hasCreditCard {
+            remainingLabel.text = "Cash: \(HelperService.hs.toMoney(rawMoney: budget)) - Credit: \(HelperService.hs.toMoney(rawMoney: spent - budget))"
+        } else {
+            remainingLabel.text = HelperService.hs.toMoney(rawMoney: remaining)
+        }
         moneyField.text = ""
     }
     
@@ -244,13 +246,14 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     // Save
     
     @IBAction func saveTapped(_ sender: Any) {
-//        DataService.ds.saveSessionLocally(budget: budget, credit: credit, spent: spent, cash: cash) {
-//            (result: String) in
-//            
-//            print(result)
-//            
-//            self.closeSession()
-//        }
+        DataService.ds.saveNewSession(spentCashMaster: sessionCashSpent, spentCreditMaster: sessionCreditSpent, budget: "\(budget)", spent: "\(spent)", spentCash: "\(cash)", spentCredit: "\(credit))") {
+            
+            (result: String) in
+            
+            print(result)
+            
+            self.closeSession()
+        }
     }
     
     func closeSession() {
