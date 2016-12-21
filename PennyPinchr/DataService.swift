@@ -209,6 +209,13 @@ class DataService {
                         if k == HelperService.hs.userID {
                             self.defaults.set("\(valueDict["sessionsID"]!)", forKey: "prefSessionsID")
                         }
+                        
+                        self.defaults.set("\(valueDict["sessionsID"]!)", forKey: "prefGroupSessions")
+                        self.defaults.set("\(valueDict["spentCash"]!)", forKey: "prefPersonalBudgetSpent")
+                        
+                        let remainingBudget = Double("\(valueDict["budget"]!)")! - Double("\(valueDict["spentCash"]!)")!
+                        
+                        self.defaults.set("\(String(format: "%.2f", remainingBudget))", forKey: "prefPersonalBudgetRemaining")
                                                 
                         if (returnedDict["memberBudgets"] as! [String: AnyObject]).count == memberArray.count {
                             completion(groupDict)
@@ -217,6 +224,35 @@ class DataService {
                 }
             }
         })
+    }
+    
+    func getUserGroups(completion:@escaping (_ result: [[String: AnyObject]]) -> Void) {
+        var savedGroupsArray = HelperService.hs.groups.components(separatedBy: ",")
+        savedGroupsArray.removeLast()
+        
+        var groupsArray = [[String: AnyObject]]()
+        
+        for eachGroup in savedGroupsArray {
+            FB_DATABASE_REF.child("groups").child(eachGroup).observeSingleEvent(of: .value, with: { (snapshot) in
+                let returnedDict = snapshot.value as? [String : AnyObject] ?? [:]
+                
+                var groupDict = [String: AnyObject]()
+                
+                groupDict["groupID"] = eachGroup as AnyObject?
+                
+                if returnedDict["name"] != nil {
+                    groupDict["name"] = "\(returnedDict["name"]!)" as AnyObject?
+                } else {
+                    groupDict["name"] = "Mystery Budget" as AnyObject?
+                }
+                
+                groupsArray.append(groupDict)
+                
+                if savedGroupsArray.count == groupsArray.count {
+                    completion(groupsArray)
+                }
+            })
+        }
     }
     
     func userImage(imageURL: String, completion:@escaping (_ result: UIImage) -> Void) {
@@ -266,6 +302,13 @@ class DataService {
                 self.defaults.set("\(returnedDict["groups"]!)", forKey: "groups")
             } else {
                 userDict["groups"] = ""
+            }
+            
+            if returnedDict["prefGroup"] != nil {
+                userDict["prefGroup"] = "\(returnedDict["prefGroup"]!)"
+                self.defaults.set("\(returnedDict["prefGroup"]!)", forKey: "prefGroup")
+            } else {
+                userDict["prefGroup"] = ""
             }
             
             if returnedDict["email"] != nil {
@@ -336,6 +379,10 @@ class DataService {
                     sessionsDict["individualSessions"] = sessionsArray as AnyObject?
                     
                     if (returnedDict["individualSessions"] as! [String: AnyObject]).count == sessionsArray.count {
+                        
+                        let remainingBudget = Double("\(valueDict["budget"]!)")! - Double("\(valueDict["spentCash"]!)")!
+                        self.defaults.set("\(String(format: "%.2f", remainingBudget))", forKey: "prefPersonalBudgetRemaining")
+                        
                         completion(sessionsDict)
                     }
                 }
@@ -477,6 +524,7 @@ class DataService {
             (result: String) in
             
             self.defaults.set("\(HelperService.hs.groups)\(result),", forKey: "groups")
+            self.defaults.set(result, forKey: "prefGroup")
             
             self.saveUserImage(imageToSave: image) {
                 (resultImage: String) in
@@ -484,6 +532,7 @@ class DataService {
                 let userDict = ["name": name,
                                 "imageURL": resultImage,
                                 "groups": HelperService.hs.groups,
+                                "prefGroup": "\(HelperService.hs.groups)".replacingOccurrences(of: ",", with: ""),
                                 "email": email]
                 
                 FB_DATABASE_REF.child("users").child(HelperService.hs.userID).setValue(userDict) { (error, ref) -> Void in
@@ -501,11 +550,16 @@ class DataService {
     
     func login(email: String, password: String, completion:@escaping (_ result: String) -> Void) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-            self.getUserData() {
-                (result: [String: String]) in
+            
+            self.defaults.set(user!.uid, forKey: "userID")
+            self.defaults.set(true, forKey: "isLoggedIn")
+            
+            if error == nil {
+                self.getUserData() {
+                    (result: [String: String]) in
                 
-                self.defaults.set(true, forKey: "isLoggedIn")
-                completion("done")
+                    completion("done")
+                }
             }
         }
     }

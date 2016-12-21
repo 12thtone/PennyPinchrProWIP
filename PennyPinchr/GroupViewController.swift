@@ -26,6 +26,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         
         loadingIndicator.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         if HelperService.hs.isLogedIn() {
             tableView.isHidden = true
@@ -109,7 +113,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.userImageView.image = aUser.memberImage
             cell.budgetStatusImageView.image = budgetStatusImage
             cell.nameLabel.text = "\(aUser.name)"
-            cell.budgetLabel.text = "Period Budget: \(HelperService.hs.toMoney(rawMoney: Double(aUser.budget)!))"
+            cell.budgetLabel.text = "Budget: \(HelperService.hs.toMoney(rawMoney: Double(aUser.budget)!))"
             cell.cashLabel.text = "Cash Spent: \(HelperService.hs.toMoney(rawMoney: Double(aUser.spentCash)!))"
             cell.creditLabel.text = "Credit Spent: \(HelperService.hs.toMoney(rawMoney: Double(aUser.spentCredit)!))"
             

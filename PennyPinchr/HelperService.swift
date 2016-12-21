@@ -34,12 +34,19 @@ class HelperService {
         return ""
     }
     
-//    var prefPersonalBudget: String {
-//        if defaults.string(forKey: "prefPersonalBudget") != nil {
-//            return defaults.string(forKey: "prefPersonalBudget")!
-//        }
-//        return ""
-//    }
+    var prefPersonalBudgetSpent: String {
+        if defaults.string(forKey: "prefPersonalBudgetSpent") != nil {
+            return defaults.string(forKey: "prefPersonalBudgetSpent")!
+        }
+        return "0.00"
+    }
+    
+    var prefPersonalBudgetRemaining: String {
+        if defaults.string(forKey: "prefPersonalBudgetRemaining") != nil {
+            return defaults.string(forKey: "prefPersonalBudgetRemaining")!
+        }
+        return "0.00"
+    }
     
     var prefGroupSessions: String {
         if defaults.string(forKey: "prefGroupSessions") != nil {

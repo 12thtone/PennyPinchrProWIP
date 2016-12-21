@@ -81,8 +81,8 @@ class AuthViewController: UIViewController {
         DataService.ds.login(email: emailField.text!, password: passwordField.text!) {
             (result: String) in
             
-            if result == "error" {
-                
+            if result != "error" {
+                self.dismissToGroupVC()
             }
         }
     }
@@ -144,5 +144,9 @@ class AuthViewController: UIViewController {
                 
             }
         }
+    }
+    
+    func dismissToGroupVC() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

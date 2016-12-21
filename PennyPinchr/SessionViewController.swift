@@ -18,12 +18,17 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var budgetLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
+    @IBOutlet weak var cautionImageView: UIImageView!
     
     var sessions = [IndividualSessionModel]()
     var sessionDetails: SessionModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(HelperService.hs.prefPersonalBudgetRemaining)
+        
+        cautionImageView.isHidden = true
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -79,6 +84,13 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             spentLabel.text = "Cash Spent: $0.00 & Credit Spent: $0.00"
         } else {
             spentLabel.text = "Cash Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spentCash)!)) & Credit Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spentCredit)!))"
+        }
+        
+        if Double(HelperService.hs.prefPersonalBudgetRemaining)! < 0.00 {
+            handleOverBudget()
+            overBudgetAlert()
+        } else {
+            cautionImageView.isHidden = true
         }
         
         if sessions.isEmpty == false {
@@ -137,6 +149,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         loadData()
         
         if Double(sessionDetails!.spent)! > Double(sessionDetails!.budget)! {
+            handleOverBudget()
             overBudgetAlert()
         }
     }
@@ -158,6 +171,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         spentLabel.textColor = UIColor.red
         spentLabel.font = UIFont(name: "Avenir-Black", size: 14)
         spentLabel.text = "Period Spent: \(HelperService.hs.toMoney(rawMoney: Double(sessionDetails!.spent)!))!!"
+        cautionImageView.isHidden = false
     }
     
     func overBudgetAlert() {

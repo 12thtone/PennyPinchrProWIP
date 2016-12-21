@@ -43,14 +43,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        ["Add User", "Info", "Logout"]
+//        ["Switch Budgets", "Add Budget", "Info", "Logout"]
         
         if indexPath.row == 0 {
+            let chooseBudgetVC = self.storyboard?.instantiateViewController(withIdentifier: "ChooseBudgetVC") as! ChooseBudgetViewController
+            let navController = UINavigationController(rootViewController: chooseBudgetVC)
+            
+            self.present(navController, animated: true, completion: nil)
+        } else if indexPath.row == 1 {
             let createGroupVC = self.storyboard?.instantiateViewController(withIdentifier: "CreateGroupVC") as! CreateGroupViewController
             let navController = UINavigationController(rootViewController: createGroupVC)
             
             self.present(navController, animated: true, completion: nil)
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 2  {
             
         } else {
             

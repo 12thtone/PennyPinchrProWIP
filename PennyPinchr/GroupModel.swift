@@ -54,6 +54,12 @@ class GroupModel {
             self._groupName = ""
         }
         
+        if group["groupID"] != nil {
+            self._groupID = "\(group["groupID"]!)"
+        } else {
+            self._groupID = ""
+        }
+        
         if group["budget"] != nil {
             self._budget = "\(group["budget"]!)"
         } else {
@@ -78,10 +84,10 @@ class GroupModel {
             self._spentCredit = ""
         }
         
-        if group["groupName"] != nil {
-            self._spentCredit = "\(group["name"]!)"
-        } else {
-            self._groupName = ""
-        }
+//        if group["groupName"] != nil {
+//            self._spentCredit = "\(group["name"]!)"
+//        } else {
+//            self._groupName = ""
+//        }
     }
 }

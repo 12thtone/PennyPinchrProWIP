@@ -112,16 +112,20 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
 
     @IBAction func enterTapped(_ sender: Any) {
         if moneyField.text != "" && budgetSaved == false {
-            budget = HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!)
-            remaining = budget
-            
-            budgetSaved = true
-            
-            moneyField.placeholder = "Enter Purchase Price"
-            enterButton.setTitle("Save Purchase", for: .normal)
-            
-            changeViews()
-            showMoneyLabels()
+            if Double(HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!)) >= Double(HelperService.hs.prefPersonalBudgetRemaining)! {
+                sessionBudgetTooHigh()
+            } else {
+                budget = HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!)
+                remaining = budget
+                
+                budgetSaved = true
+                
+                moneyField.placeholder = "Enter Purchase Price"
+                enterButton.setTitle("Save Purchase", for: .normal)
+                
+                changeViews()
+                showMoneyLabels()
+            }
         } else if moneyField.text != "" && budgetSaved == true {
             lastItem = HelperService.hs.priceWithTax(rawPrice: HelperService.hs.cleanDoubleMoney(dirtyString: moneyField.text!), tax: tax)
             spent += lastItem
@@ -138,6 +142,19 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         tfString = ""
         tfCounter = 0
+    }
+    
+    func sessionBudgetTooHigh() {
+        let alertController = UIAlertController(title: "Uh oh...", message: "The budget for this shopping session is more than your remaining funds.", preferredStyle: .actionSheet)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.resetTapped(self)
+        }
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true) {
+            
+        }
     }
     
     func overBudget() {
@@ -233,6 +250,8 @@ class NewSessionViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @IBAction func resetTapped(_ sender: Any) {
+        moneyField.text = ""
+        
         budget = 0.0
         spent = 0.0
         remaining = 0.0
