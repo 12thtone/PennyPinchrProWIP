@@ -179,4 +179,20 @@ class HelperService {
         
         return dateFormatter.date(from: dateString)!
     }
+    
+    func sessionAverage(sessions: [SessionModel]) -> String {
+        var totalSpent = 0.0
+        for eachSession in sessions {
+            totalSpent += Double(eachSession.spent)!
+        }
+        return String(format: "%.2f", (totalSpent / Double(sessions.count)))
+    }
+    
+    func sessionMax(sessions: [SessionModel]) -> String {
+        var amounts = [Double]()
+        for eachSession in sessions {
+            amounts.append(Double(eachSession.spent)!)
+        }
+        return String(format: "%.2f", (amounts.max())!)
+    }
 }

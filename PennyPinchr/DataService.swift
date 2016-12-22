@@ -411,6 +411,43 @@ class DataService {
         })
     }
     
+    func getIndSessions(completion:@escaping (_ result: [[String: String]]) -> Void) {
+        
+        var sessionsArray = [[String: String]]()
+        
+        FB_DATABASE_REF.child("sessions").child(HelperService.hs.prefGroupSessions).child("individualSessions").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            for indSession in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                if let returnedDict = indSession.value as? [String: String] {
+                    
+                    var sessionDict = [String: String]()
+                    
+                    if returnedDict["budget"] != nil {
+                        sessionDict["budget"] = returnedDict["budget"]!
+                    }
+                    
+                    if returnedDict["spent"] != nil {
+                        sessionDict["spent"] = returnedDict["spent"]!
+                    }
+                    
+                    if returnedDict["spentCash"] != nil {
+                        sessionDict["spentCash"] = returnedDict["spentCash"]!
+                    }
+                    
+                    if returnedDict["spentCredit"] != nil {
+                        sessionDict["spentCredit"] = returnedDict["spentCredit"]!
+                    }
+                    
+                    sessionsArray.append(sessionDict)
+                    
+                    if snapshot.children.allObjects.count == sessionsArray.count {
+                        completion(sessionsArray)
+                    }
+                }
+            }
+        })
+    }
+    
     func saveNewSession(spentCashMaster: String, spentCreditMaster: String, budget: String, spent: String, spentCash: String, spentCredit: String, completion:@escaping (_ result: String) -> Void) {
         
         let individualDict = ["date": HelperService.hs.dateToday(),

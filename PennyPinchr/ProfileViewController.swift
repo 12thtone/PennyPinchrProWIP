@@ -8,27 +8,31 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController {
     
     @IBOutlet weak var userImageView: ImageViewRadius!
     @IBOutlet weak var budgetStatusImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var userBudgetLabel: UILabel!
-    @IBOutlet weak var editBudgetButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var percentLabel: UILabel!
+    @IBOutlet weak var cashLabel: UILabel!
+    @IBOutlet weak var creditLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var avgLabel: UILabel!
+    @IBOutlet weak var maxLabel: UILabel!
     
-    var user: UserModel?
-    var historicArray = [String]()
+    var sessions = [SessionModel]()
+    
+    var userImage: UIImage?
+    var userName: String?
+    var userBudget: String?
+    var userCash: String?
+    var userCredit: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        let editImage = UIImage(named: "edit")
-        editBudgetButton.imageView?.contentMode = .scaleAspectFit
-        editBudgetButton.setImage(editImage, for: .normal)
+        loadProfileData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,27 +40,47 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historicArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC") as? ProfileTableViewCell {
+    func loadProfileData() {
+        DataService.ds.getIndSessions() {
+            (result: [[String: String]]) in
             
-            return cell
+            print(result)
+            
+            for session in result {
+                self.sessions.append(SessionModel.init(session: session as [String : AnyObject]))
+                
+                if result.count == self.sessions.count {
+                    self.setViews()
+                }
+            }
         }
-        return ProfileTableViewCell()
     }
     
-    @IBAction func editBudgetTapped(_ sender: Any) {
+    func setViews() {
+        userImageView.image = userImage
+        nameLabel.text = userName!
+        budgetLabel.text = userBudget!
+        percentLabel.text = "CALC ME!!!"
+        cashLabel.text = userCash!
+        creditLabel.text = userCredit!
+        countLabel.text = "\(sessions.count)"
+        avgLabel.text = HelperService.hs.sessionAverage(sessions: sessions)
+        maxLabel.text = HelperService.hs.sessionMax(sessions: sessions)
+    }
+    
+    @IBAction func editTapped(_ sender: Any) {
         
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
+    @IBAction func messageTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func yayTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func doneTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     

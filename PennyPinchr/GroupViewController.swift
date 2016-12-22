@@ -126,7 +126,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-//        profileVC.user = users[indexPath.row]
+        profileVC.userImage = users[indexPath.row].memberImage
+        profileVC.userName = users[indexPath.row].name
+        profileVC.userBudget = users[indexPath.row].budget
+        profileVC.userCash = users[indexPath.row].spentCash
+        profileVC.userCredit = users[indexPath.row].spentCredit
+
         let navController = UINavigationController(rootViewController: profileVC)
         
         self.present(navController, animated: true, completion: nil)

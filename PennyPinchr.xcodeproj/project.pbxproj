@@ -17,7 +17,6 @@
 		035FB4971E0376C2006BF437 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035FB4961E0376C2006BF437 /* SettingsViewController.swift */; };
 		035FB4991E0376F0006BF437 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035FB4981E0376F0006BF437 /* CreateGroupViewController.swift */; };
 		035FB49C1E03771C006BF437 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035FB49B1E03771C006BF437 /* ProfileViewController.swift */; };
-		035FB49E1E037731006BF437 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035FB49D1E037731006BF437 /* ProfileTableViewCell.swift */; };
 		035FB4A21E037DEA006BF437 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035FB4A11E037DEA006BF437 /* UserModel.swift */; };
 		037C3D921E022BF8001AAFEE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */; };
 		037C3D961E022CB0001AAFEE /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C3D951E022CB0001AAFEE /* GroupViewController.swift */; };
@@ -74,7 +73,6 @@
 		035FB4961E0376C2006BF437 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		035FB4981E0376F0006BF437 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		035FB49B1E03771C006BF437 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		035FB49D1E037731006BF437 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		035FB4A11E037DEA006BF437 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		037C3D911E022BF8001AAFEE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		037C3D951E022CB0001AAFEE /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +135,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0327DAF81E0B592C000A2374 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				03916FDE1E09F379002A2E4F /* InviteViewController.swift */,
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
+		0327DAF91E0B596F000A2374 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				03B15DBB1E074BE4000797D5 /* AuthViewController.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
 		032D1DA61E0B03AE0008BE3D /* ChooseBudget */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +179,8 @@
 		035FB4931E037696006BF437 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0327DAF91E0B596F000A2374 /* Auth */,
+				0327DAF81E0B592C000A2374 /* Invite */,
 				032D1DA81E0B1BD80008BE3D /* Info */,
 				032D1DA71E0B03C20008BE3D /* NewGroup */,
 				032D1DA61E0B03AE0008BE3D /* ChooseBudget */,
@@ -177,10 +193,7 @@
 		035FB49A1E0376F8006BF437 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				03B15DBB1E074BE4000797D5 /* AuthViewController.swift */,
 				035FB49B1E03771C006BF437 /* ProfileViewController.swift */,
-				035FB49D1E037731006BF437 /* ProfileTableViewCell.swift */,
-				03916FDE1E09F379002A2E4F /* InviteViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -526,7 +539,6 @@
 				03979CB91DFB1AA100855574 /* NewSessionViewController.swift in Sources */,
 				035FB4971E0376C2006BF437 /* SettingsViewController.swift in Sources */,
 				035C29911E041C8600CD530F /* Constants.swift in Sources */,
-				035FB49E1E037731006BF437 /* ProfileTableViewCell.swift in Sources */,
 				03916FE31E09F745002A2E4F /* ChooseBudgetTableViewCell.swift in Sources */,
 				035655191E04BE8A00472751 /* ImageViewRadius.swift in Sources */,
 				03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */,
