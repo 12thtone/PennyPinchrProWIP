@@ -26,6 +26,8 @@
 		03916FE11E09F72D002A2E4F /* ChooseBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE01E09F72D002A2E4F /* ChooseBudgetViewController.swift */; };
 		03916FE31E09F745002A2E4F /* ChooseBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE21E09F745002A2E4F /* ChooseBudgetTableViewCell.swift */; };
 		03916FE51E0A08BF002A2E4F /* IndividualSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03916FE41E0A08BF002A2E4F /* IndividualSessionModel.swift */; };
+		03952BAF1E0D5D0000A5B64E /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03952BAE1E0D5D0000A5B64E /* MessageViewController.swift */; };
+		03952BB11E0D5D1E00A5B64E /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03952BB01E0D5D1E00A5B64E /* MessageTableViewCell.swift */; };
 		03979CB71DFB1AA100855574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB61DFB1AA100855574 /* AppDelegate.swift */; };
 		03979CB91DFB1AA100855574 /* NewSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03979CB81DFB1AA100855574 /* NewSessionViewController.swift */; };
 		03979CBC1DFB1AA100855574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03979CBA1DFB1AA100855574 /* Main.storyboard */; };
@@ -82,6 +84,8 @@
 		03916FE01E09F72D002A2E4F /* ChooseBudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseBudgetViewController.swift; sourceTree = "<group>"; };
 		03916FE21E09F745002A2E4F /* ChooseBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseBudgetTableViewCell.swift; sourceTree = "<group>"; };
 		03916FE41E0A08BF002A2E4F /* IndividualSessionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualSessionModel.swift; sourceTree = "<group>"; };
+		03952BAE1E0D5D0000A5B64E /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		03952BB01E0D5D1E00A5B64E /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		03979CB31DFB1AA100855574 /* PennyPinchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyPinchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03979CB61DFB1AA100855574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03979CB81DFB1AA100855574 /* NewSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +211,15 @@
 			name = Group;
 			sourceTree = "<group>";
 		};
+		03952BAD1E0D5CE500A5B64E /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				03952BAE1E0D5D0000A5B64E /* MessageViewController.swift */,
+				03952BB01E0D5D1E00A5B64E /* MessageTableViewCell.swift */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
 		03979CAA1DFB1AA100855574 = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +245,7 @@
 		03979CB51DFB1AA100855574 /* PennyPinchr */ = {
 			isa = PBXGroup;
 			children = (
+				03952BAD1E0D5CE500A5B64E /* Messages */,
 				03979CEA1DFC639300855574 /* Views */,
 				035FB49A1E0376F8006BF437 /* Profile */,
 				035FB4931E037696006BF437 /* Settings */,
@@ -528,8 +542,10 @@
 			files = (
 				03979CF01DFC64C800855574 /* SessionTableViewCell.swift in Sources */,
 				037C3D981E022CC2001AAFEE /* GroupTableViewCell.swift in Sources */,
+				03952BB11E0D5D1E00A5B64E /* MessageTableViewCell.swift in Sources */,
 				03979CE91DFC5E3100855574 /* SessionViewController.swift in Sources */,
 				03CD1DAE1DFDC67C00CFECC8 /* SessionModel.swift in Sources */,
+				03952BAF1E0D5D0000A5B64E /* MessageViewController.swift in Sources */,
 				032D1DAA1E0B1BEC0008BE3D /* InfoViewController.swift in Sources */,
 				03D5C7031DFEF4A600E4484E /* BudgetModel.swift in Sources */,
 				035C29931E0429C400CD530F /* ButtonRadius.swift in Sources */,

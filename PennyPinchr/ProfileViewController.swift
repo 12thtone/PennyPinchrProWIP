@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userImageView: ImageViewRadius!
     @IBOutlet weak var budgetStatusImageView: UIImageView!
@@ -23,11 +23,16 @@ class ProfileViewController: UIViewController {
     
     var sessions = [SessionModel]()
     
+    var alertController = UIAlertController()
+    
     var userImage: UIImage?
     var userName: String?
     var userBudget: String?
     var userCash: String?
     var userCredit: String?
+    
+    var tfCounter = 0
+    var tfString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,12 @@ class ProfileViewController: UIViewController {
     }
     
     func setViews() {
+        if Double(userBudget!)! < Double(userCash!)! {
+            budgetStatusImageView.image = UIImage(named: "caution")
+        } else {
+            budgetStatusImageView.image = UIImage(named: "logo")
+        }
+        
         userImageView.image = userImage
         nameLabel.text = userName!
         budgetLabel.text = userBudget!
@@ -68,8 +79,54 @@ class ProfileViewController: UIViewController {
         maxLabel.text = HelperService.hs.sessionMax(sessions: sessions)
     }
     
-    @IBAction func editTapped(_ sender: Any) {
+    func enterBudget() {
+        alertController = UIAlertController(title: "New Personal Budget", message: "Please enter a personal budget amount for this group budget.", preferredStyle: .alert)
         
+        alertController.textFields?[0].delegate = self
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "New Budget:"
+            textField.keyboardType = .numberPad
+            textField.clearButtonMode = .always
+        }
+        
+        let okAction = UIAlertAction(title: "Save", style: .default) { (action) in
+            self.saveNewBudget(amount: self.alertController.textFields![0].text!)
+        }
+        alertController.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "Save", style: .cancel) { (action) in
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true) {
+            
+        }
+    }
+    
+    func saveNewBudget(amount: String) {
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        tfCounter += 1
+        tfString += string
+        
+        alertController.textFields?[0].text = HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.moneyDouble(rawString: "\(tfString)", charCount: tfCounter))!)
+        
+        return false
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        tfCounter = 0
+        tfString = ""
+        
+        return true
+    }
+    
+    @IBAction func editTapped(_ sender: Any) {
+        enterBudget()
     }
     
     @IBAction func messageTapped(_ sender: Any) {
