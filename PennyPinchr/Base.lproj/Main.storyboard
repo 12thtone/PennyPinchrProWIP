@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Message View Controller-->
+        <!--Messages-->
         <scene sceneID="AsF-cw-Jbd">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="gOi-ej-QeS" customClass="MessageViewController" customModule="PennyPinchr" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,11 +29,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="xpL-4E-AjC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageTVC" rowHeight="60" id="xpL-4E-AjC" customClass="MessageTableViewCell" customModule="PennyPinchr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xpL-4E-AjC" id="OQ7-DX-GJy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="eJz-LT-y4O" customClass="ImageViewRound" customModule="PennyPinchr" customModuleProvider="target">
@@ -45,21 +45,52 @@
                                                         <constraint firstAttribute="width" constant="43" id="rAC-a7-nqv"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_img" translatesAutoresizingMaskIntoConstraints="NO" id="v7s-oD-CWh" customClass="ImageViewRound" customModule="PennyPinchr" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yay" translatesAutoresizingMaskIntoConstraints="NO" id="v7s-oD-CWh" customClass="ImageViewRound" customModule="PennyPinchr" customModuleProvider="target">
                                                     <rect key="frame" x="324" y="8" width="43" height="43"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="43" id="5Qg-Ai-Wa9"/>
                                                         <constraint firstAttribute="height" constant="43" id="S3H-OU-8Aw"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Sender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWS-f8-cgW">
+                                                    <rect key="frame" x="59" y="8" width="257" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="9ta-z6-6Mq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uh oh... Your master budget has been exceeded." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pf-J3-UeH">
+                                                    <rect key="frame" x="59" y="30" width="257" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="8wE-Wa-4gE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="4pf-J3-UeH" secondAttribute="bottom" constant="1" id="2OR-ef-Ipe"/>
+                                                <constraint firstItem="bWS-f8-cgW" firstAttribute="top" secondItem="OQ7-DX-GJy" secondAttribute="topMargin" id="5SV-36-0Te"/>
                                                 <constraint firstItem="v7s-oD-CWh" firstAttribute="trailing" secondItem="OQ7-DX-GJy" secondAttribute="trailingMargin" id="9o5-3H-My5"/>
+                                                <constraint firstItem="v7s-oD-CWh" firstAttribute="leading" secondItem="4pf-J3-UeH" secondAttribute="trailing" constant="8" id="O5L-eK-JSB"/>
                                                 <constraint firstItem="eJz-LT-y4O" firstAttribute="leading" secondItem="OQ7-DX-GJy" secondAttribute="leadingMargin" id="RQY-Tx-kQZ"/>
+                                                <constraint firstItem="4pf-J3-UeH" firstAttribute="leading" secondItem="eJz-LT-y4O" secondAttribute="trailing" constant="8" id="Yui-uY-p9P"/>
                                                 <constraint firstItem="eJz-LT-y4O" firstAttribute="top" secondItem="OQ7-DX-GJy" secondAttribute="topMargin" id="bM0-ra-UKg"/>
                                                 <constraint firstItem="v7s-oD-CWh" firstAttribute="top" secondItem="OQ7-DX-GJy" secondAttribute="topMargin" id="mL5-au-mNu"/>
+                                                <constraint firstItem="v7s-oD-CWh" firstAttribute="leading" secondItem="bWS-f8-cgW" secondAttribute="trailing" constant="8" id="qpS-Jb-Qam"/>
+                                                <constraint firstItem="bWS-f8-cgW" firstAttribute="leading" secondItem="eJz-LT-y4O" secondAttribute="trailing" constant="8" id="vUQ-Wq-Nkp"/>
+                                                <constraint firstItem="4pf-J3-UeH" firstAttribute="top" secondItem="bWS-f8-cgW" secondAttribute="bottom" constant="1" id="zou-MI-qZN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageIconImageView" destination="v7s-oD-CWh" id="aje-2O-t0F"/>
+                                            <outlet property="messageLabel" destination="4pf-J3-UeH" id="7P8-b3-cj6"/>
+                                            <outlet property="nameLabel" destination="bWS-f8-cgW" id="2gz-OU-pyX"/>
+                                            <outlet property="userImageView" destination="eJz-LT-y4O" id="tP9-Qy-KlV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -72,7 +103,10 @@
                             <constraint firstItem="1fE-dJ-N79" firstAttribute="leading" secondItem="9JC-8F-uJi" secondAttribute="leading" id="rO0-rl-Wd7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="WFH-kH-B8R"/>
+                    <navigationItem key="navigationItem" title="Messages" id="WFH-kH-B8R"/>
+                    <connections>
+                        <outlet property="tableView" destination="1fE-dJ-N79" id="u8f-P3-2zn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bk-vI-2Ix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -472,6 +506,9 @@
                                     <rect key="frame" x="273" y="7" width="38" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" backgroundImage="edit"/>
+                                    <connections>
+                                        <action selector="editBudgetTapped:" destination="m7c-c0-BBG" eventType="touchUpInside" id="1i5-Ej-3fb"/>
+                                    </connections>
                                 </button>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1740,7 +1777,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dRB-Wh-zXN" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="mail_small" id="vNV-Dq-B8x"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Rmo-cE-ucC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rmo-cE-ucC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.98431372549019602" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>

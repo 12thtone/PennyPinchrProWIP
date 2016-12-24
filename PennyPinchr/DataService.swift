@@ -203,11 +203,15 @@ class DataService {
                 
                 var memberArray = [[String: AnyObject]]()
                 
-                for (k, v) in returnedDict["memberBudgets"] as! [String: AnyObject] {
-                    let valueDict = v as! [String: String]
+                var groupMembersString = ""
+                
+                for (memberID, memberData) in returnedDict["memberBudgets"] as! [String: AnyObject] {
+                    let valueDict = memberData as! [String: String]
                     print("\(valueDict["spent"]!)")
                     
-                    self.getImage(member: k) {
+                    groupMembersString += "\(memberID),"
+                    
+                    self.getImage(member: memberID) {
                         (theImage: UIImage) in
                         
                         let memberDict = ["budget": "\(valueDict["budget"]!)" as AnyObject,
@@ -216,14 +220,15 @@ class DataService {
                             "name": "\(valueDict["name"]!)" as AnyObject,
                             "spentCash": "\(valueDict["spentCash"]!)" as AnyObject,
                             "spentCredit": "\(valueDict["spentCredit"]!)" as AnyObject,
+                            "memberID": "\(memberID)" as AnyObject,
                             "userImage": theImage] as [String : AnyObject]
                         
-                        memberArray.append([k: memberDict as AnyObject])
+                        memberArray.append([memberID: memberDict as AnyObject])
                         groupDict["memberBudgets"] = memberArray as AnyObject?
                         
                         print("\((returnedDict["memberBudgets"] as! [String: AnyObject]).count) - \(memberArray.count)")
                         
-                        if k == HelperService.hs.userID {
+                        if memberID == HelperService.hs.userID {
                             self.defaults.set("\(valueDict["sessionsID"]!)", forKey: "prefSessionsID")
                         }
                         
@@ -235,6 +240,7 @@ class DataService {
                         self.defaults.set("\(String(format: "%.2f", remainingBudget))", forKey: "prefPersonalBudgetRemaining")
                                                 
                         if (returnedDict["memberBudgets"] as! [String: AnyObject]).count == memberArray.count {
+                            self.defaults.set(groupMembersString, forKey: "prefGroupUsers")
                             completion(groupDict)
                         }
                     }
@@ -304,6 +310,7 @@ class DataService {
             
             if returnedDict["name"] != nil {
                 userDict["name"] = "\(returnedDict["name"]!)"
+                self.defaults.set("\(userDict["name"]!)", forKey: "name")
             } else {
                 userDict["name"] = ""
             }
@@ -467,6 +474,7 @@ class DataService {
                     
                     if error == nil {
                         self.updateBudgetSession(spent: spent, spentCash: spentCash, spentCredit: spentCredit)
+                        
                         completion("done")
                     } else {
                         print("\(error.debugDescription)")
@@ -500,6 +508,13 @@ class DataService {
                     var cashSaved = budgetData["spentCash"] as? String
                     cashSaved = String(format: "%.2f", (Double(cashSaved!)!) + (Double(spentCash)!))
                     budgetData["spentCash"] = cashSaved as AnyObject?
+                    
+                    if budgetData["budget"] != nil {
+                        let budgetMaster = budgetData["budget"] as? String
+                        if Double(cashSaved!)! > Double(budgetMaster!)! {
+                            self.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: HelperService.hs.prefGroupUsers, messageType: "overMaster", messageData: HelperService.hs.prefGroup)
+                        }
+                    }
                 }
                 
                 if budgetData["spentCredit"] != nil {
@@ -536,6 +551,13 @@ class DataService {
                     var cashSaved = budgetData["spentCash"] as? String
                     cashSaved = String(format: "%.2f", (Double(cashSaved!)!) + (Double(spentCash)!))
                     budgetData["spentCash"] = cashSaved as AnyObject?
+                    
+                    if budgetData["budget"] != nil {
+                        let budgetMaster = budgetData["budget"] as? String
+                        if Double(cashSaved!)! > Double(budgetMaster!)! {
+                            self.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: HelperService.hs.prefGroupUsers, messageType: "overPersonal", messageData: HelperService.hs.prefGroup)
+                        }
+                    }
                 }
                 
                 if budgetData["spentCredit"] != nil {
@@ -554,6 +576,111 @@ class DataService {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // Messages
+    
+    func postMessage(sender: String, senderName: String, receiver: String, messageType: String, messageData: String) {
+        
+        var messageDict = [String: String]()
+        
+        if messageType == "overMaster" || messageType == "masterChanged" {
+            
+            var memberArray = HelperService.hs.prefGroupUsers.components(separatedBy: ",")
+            memberArray.removeLast()
+            
+            for eachMember in memberArray {
+                messageDict = ["sender": sender,
+                               "senderName": senderName,
+                               "receiver": eachMember.replacingOccurrences(of: ",", with: ""),
+                               "messageType": messageType,
+                               "messageData": messageData,
+                               "date": HelperService.hs.dateToday()]
+                
+                FB_DATABASE_REF.child("messages").child(HelperService.hs.userID).childByAutoId().updateChildValues(messageDict)
+                self.incrementUnreadMessages(receiver: sender)
+            }
+        } else {
+            messageDict = ["sender": sender,
+                           "senderName": senderName,
+                           "receiver": receiver,
+                           "messageType": messageType,
+                           "messageData": messageData,
+                           "date": HelperService.hs.dateToday()]
+            
+            FB_DATABASE_REF.child("messages").child(HelperService.hs.userID).childByAutoId().updateChildValues(messageDict)
+            self.incrementUnreadMessages(receiver: sender)
+        }
+    }
+    
+    func incrementUnreadMessages(receiver: String) {
+        FB_DATABASE_REF.child("users").child(receiver).child("unreadMessages").runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            
+            if let unreadData = currentData.value as? String {
+                currentData.value = "\(Int(unreadData)! + 1)"
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func clearUnreadMessages() {
+        FB_DATABASE_REF.child("users").child(HelperService.hs.userID).child("unreadMessages").setValue("0")
+    }
+    
+    func getMessages(completion:@escaping (_ result: [[String: AnyObject]]) -> Void) {
+        FB_DATABASE_REF.child("messages").child(HelperService.hs.userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var messagesArray = [[String: AnyObject]]()
+            
+            for indMessage in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                if let returnedDict = indMessage.value as? [String: String] {
+                    
+                    self.getImage(member: "\(returnedDict["sender"]!)") {
+                        (theImage: UIImage) in
+                        
+                        var messageDict = [String: AnyObject]()
+                    
+                        messageDict["senderImage"] = theImage
+                        
+                        if returnedDict["sender"] != nil {
+                            messageDict["sender"] = returnedDict["sender"]! as AnyObject?
+                        }
+                        
+                        if returnedDict["receiver"] != nil {
+                            messageDict["receiver"] = returnedDict["receiver"]! as AnyObject?
+                        }
+                        
+                        if returnedDict["messageType"] != nil {
+                            messageDict["messageType"] = returnedDict["messageType"]! as AnyObject?
+                        } else {
+                            messageDict["messageType"] = "" as AnyObject?
+                        }
+                        
+                        if returnedDict["messageData"] != nil {
+                            messageDict["messageData"] = returnedDict["messageData"]! as AnyObject?
+                        }
+                        
+                        messageDict["message"] = HelperService.hs.messageText(type: returnedDict["messageType"]!) as AnyObject?
+                        
+                        if returnedDict["date"] != nil {
+                            messageDict["date"] = returnedDict["date"]! as AnyObject?
+                        }
+                        
+                        messagesArray.append(messageDict)
+                        
+                        if snapshot.children.allObjects.count == messagesArray.count {
+                            completion(messagesArray)
+                        }
+                    }
+                }
+            }
+        })
     }
     
     // Auth
@@ -593,6 +720,7 @@ class DataService {
                 
                 FB_DATABASE_REF.child("users").child(HelperService.hs.userID).setValue(userDict) { (error, ref) -> Void in
                     if error == nil {
+                        self.defaults.set(name, forKey: "name")
                         completion("done")
                     } else {
                         print("\(error.debugDescription)")

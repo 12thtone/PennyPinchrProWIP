@@ -142,6 +142,9 @@ class CreateGroupViewController: UIViewController, UIImagePickerControllerDelega
         DataService.ds.completeAccount(email: email, name: userName, image: imageToSave!, groupName: nameField.text!) {
             (result: String) in
             
+            DataService.ds.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: HelperService.hs.name, messageType: "welcomeApp", messageData: "")
+            DataService.ds.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: HelperService.hs.name, messageType: "welcomeGroup", messageData: "")
+            
             self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         }
     }

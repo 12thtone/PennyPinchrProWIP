@@ -55,6 +55,13 @@ class HelperService {
         return ""
     }
     
+    var prefGroupUsers: String {
+        if defaults.string(forKey: "prefGroupUsers") != nil {
+            return defaults.string(forKey: "prefGroupUsers")!
+        }
+        return ""
+    }
+    
     var groups: String {
         if defaults.string(forKey: "groups") != nil {
             return defaults.string(forKey: "groups")!
@@ -194,5 +201,27 @@ class HelperService {
             amounts.append(Double(eachSession.spent)!)
         }
         return String(format: "%.2f", (amounts.max())!)
+    }
+    
+    func messageText(type: String) -> String {
+        if type == "yay" {
+            return "Nice job on your budget!"
+        } else if type == "invite" {
+            return "You're invited to join our budget!"
+        } else if type == "overMaster" {
+            return "Uh oh... Your master budget has been exceeded."
+        } else if type == "overPersonal" {
+            return "Oops... You've overspent your personal budget."
+        } else if type == "masterChanged" {
+            return "Your master budget has been changed."
+        } else if type == "personalChanged" {
+            return "Your personal budget has been changed."
+        } else if type == "welcomeApp" {
+            return "Welcome to PennyPinchr - Your Budgeting Team App"
+        } else if type == "welcomeGroup" {
+            return "Welcome to the group!"
+        }
+
+        return "MESSAGE ERROR"
     }
 }

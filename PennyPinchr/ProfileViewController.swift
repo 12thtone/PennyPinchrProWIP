@@ -25,7 +25,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     var alertController = UIAlertController()
     
+    var userID: String?
     var userImage: UIImage?
+    var imageURL: String?
     var userName: String?
     var userBudget: String?
     var userCash: String?
@@ -95,7 +97,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         }
         alertController.addAction(okAction)
         
-        let cancelAction = UIAlertAction(title: "Save", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             
         }
         alertController.addAction(cancelAction)
@@ -106,7 +108,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveNewBudget(amount: String) {
-        
+        DataService.ds.updateMemberGroupBudget(group: HelperService.hs.prefGroup, member: userID!, budget: amount) {
+            (result: String) in
+            
+            DataService.ds.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: self.userID!, messageType: "personalChanged", messageData: HelperService.hs.prefGroup)
+            
+            print(result)
+            
+            self.setViews()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -134,7 +144,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func yayTapped(_ sender: Any) {
-        
+        DataService.ds.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: userID!, messageType: "yay", messageData: "")
     }
     
     @IBAction func doneTapped(_ sender: Any) {

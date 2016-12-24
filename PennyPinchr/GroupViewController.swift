@@ -8,16 +8,20 @@
 
 import UIKit
 
-class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var percentSpentLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var reportsButton: UIButton!
     
     var users = [GroupMemberModel]()
     var budget: BudgetModel?
+    
+    var alertController = UIAlertController()
+    
+    var tfCounter = 0
+    var tfString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,6 +131,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
         profileVC.userImage = users[indexPath.row].memberImage
+        profileVC.userID = users[indexPath.row].memberID
         profileVC.userName = users[indexPath.row].name
         profileVC.userBudget = users[indexPath.row].budget
         profileVC.userCash = users[indexPath.row].spentCash
@@ -135,5 +140,57 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let navController = UINavigationController(rootViewController: profileVC)
         
         self.present(navController, animated: true, completion: nil)
+    }
+    
+    @IBAction func editBudgetTapped(_ sender: Any) {
+        alertController = UIAlertController(title: "New Master Budget", message: "Please enter a budget amount for the group.", preferredStyle: .alert)
+        
+        alertController.textFields?[0].delegate = self
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "New Budget:"
+            textField.keyboardType = .numberPad
+            textField.clearButtonMode = .always
+        }
+        
+        let okAction = UIAlertAction(title: "Save", style: .default) { (action) in
+            self.setNewBudget(amount: self.alertController.textFields![0].text!)
+        }
+        alertController.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true) {
+            
+        }
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        tfCounter += 1
+        tfString += string
+        
+        alertController.textFields?[0].text = HelperService.hs.toMoney(rawMoney: Double(HelperService.hs.moneyDouble(rawString: "\(tfString)", charCount: tfCounter))!)
+        
+        return false
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        tfCounter = 0
+        tfString = ""
+        
+        return true
+    }
+    
+    func setNewBudget(amount: String) {
+        DataService.ds.updateGroupBudget(group: HelperService.hs.prefGroup, budget: amount) {
+            (result: String) in
+            
+            DataService.ds.postMessage(sender: HelperService.hs.userID, senderName: HelperService.hs.name, receiver: HelperService.hs.prefGroupUsers, messageType: "masterChanged", messageData: HelperService.hs.prefGroup)
+            
+            self.setViews()
+        }
     }
 }

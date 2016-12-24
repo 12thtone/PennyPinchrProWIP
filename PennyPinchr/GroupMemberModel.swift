@@ -16,6 +16,7 @@ class GroupMemberModel {
     private var _spentCredit: String!
     private var _name: String!
     private var _memberImage: UIImage!
+    private var _memberID: String!
     
     var budget: String {
         return _budget
@@ -39,6 +40,10 @@ class GroupMemberModel {
     
     var memberImage: UIImage {
         return _memberImage
+    }
+    
+    var memberID: String {
+        return _memberID
     }
     
     init(member: [String: AnyObject]) {
@@ -71,6 +76,12 @@ class GroupMemberModel {
             self._name = "\(member["name"]!)"
         } else {
             self._name = ""
+        }
+        
+        if member["memberID"] != nil {
+            self._memberID = "\(member["memberID"]!)"
+        } else {
+            self._memberID = ""
         }
         
         if member["userImage"] != nil {
